@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -13,30 +13,4 @@
         android:layout_height="match_parent"
         app:navGraph="@navigation/navigation"
         app:defaultNavHost="true" />
-
-    <LinearLayout
-        android:id="@+id/button_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true">
-
-        <Button
-            android:id="@+id/button_games"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Games" />
-
-        <Button
-            android:id="@+id/button_lists"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lists" />
-
-        <Button
-            android:id="@+id/button_reviews"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reviews" />
-    </LinearLayout>
 </RelativeLayout>
