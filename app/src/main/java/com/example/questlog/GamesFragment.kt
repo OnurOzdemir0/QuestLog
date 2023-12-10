@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,24 +32,32 @@ class GamesFragment : Fragment() {
         gamesRecyclerView.adapter = GamesAdapter(getMockGames())
     }
 
-    private fun getMockGames(): List<String> {
-        return listOf("Game 1", "Game 2", "Game 3", "Game 4")
+    private fun getMockGames(): List<Game> {
+        return listOf(
+            Game(gameID = 1, name = "Game 1", desc = "Description for Game 1"),
+            Game(gameID = 2, name = "Game 2", desc = "Description for Game 2"),
+            Game(gameID = 3, name = "Game 3", desc = "Description for Game 3"),
+            Game(gameID = 4, name = "Game 4", desc = "Description for Game 4")
+        )
     }
 }
 
-class GamesAdapter(private val gamesList: List<String>) : RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
+class GamesAdapter(private val gamesList: List<Game>) : RecyclerView.Adapter<GamesAdapter.GameViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(android.R.id.text1)
+    class GameViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imageView: ImageView = view.findViewById(R.id.game_image)
+        val textView: TextView = view.findViewById(R.id.game_name)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_game, parent, false)
+        return GameViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = gamesList[position]
+    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
+        val game = gamesList[position]
+        holder.textView.text = game.name
+        holder.imageView.setImageResource(R.drawable.game_alanwake2)
     }
 
     override fun getItemCount(): Int = gamesList.size
