@@ -18,3 +18,4 @@ class Review(
     val rating: Int? = null,
     val reviewText: String
 )
+

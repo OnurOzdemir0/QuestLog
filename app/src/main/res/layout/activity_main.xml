@@ -10,7 +10,67 @@
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:navGraph="@navigation/navigation"
-        app:defaultNavHost="true" />
+        android:layout_height="572dp"
+        android:layout_below="@+id/linerLayout"
+        android:layout_marginTop="12dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation" />
+
+    <LinearLayout
+        android:id="@+id/linerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="34dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/app_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="QuestLog"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/verticalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/games_page_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Games" />
+
+            <Button
+                android:id="@+id/playlist_page_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Playlist" />
+
+            <Button
+                android:id="@+id/reviews_page_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reviews" />
+
+            <Button
+                android:id="@+id/lists_page_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lists" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </RelativeLayout>
