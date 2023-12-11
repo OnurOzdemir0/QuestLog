@@ -3,22 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainFragment">
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.questlog.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_gamesFragment"
-            app:destination="@id/gamesFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_listsFragment"
-            app:destination="@id/listsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_reviewsFragment"
-            app:destination="@id/reviewsFragment" />
-    </fragment>
+    app:startDestination="@id/gamesFragment">
     <fragment
         android:id="@+id/gamesFragment"
         android:name="com.example.questlog.GamesFragment"
@@ -27,6 +12,24 @@
         <action
             android:id="@+id/action_gamesFragment_to_gameDetailFragment"
             app:destination="@id/gameDetailFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_listsFragment2"
+            app:destination="@id/listsFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_playlist2"
+            app:destination="@id/playlistFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_reviewsFragment2"
+            app:destination="@id/reviewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="com.example.questlog.GameDetailFragment"
+        android:label="fragment_game_detail"
+        tools:layout="@layout/fragment_game_detail" >
+        <action
+            android:id="@+id/action_gameDetailFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment" />
     </fragment>
     <fragment
         android:id="@+id/listsFragment"
@@ -34,19 +37,45 @@
         android:label="fragment_lists"
         tools:layout="@layout/fragment_lists" >
         <action
+            android:id="@+id/action_listsFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment" />
+        <action
             android:id="@+id/action_listsFragment_to_listDetailFragment"
             app:destination="@id/listDetailFragment" />
+        <action
+            android:id="@+id/action_listsFragment_to_playlist2"
+            app:destination="@id/playlistFragment" />
+        <action
+            android:id="@+id/action_listsFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/gameDetailFragment"
-        android:name="com.example.questlog.GameDetailFragment"
-        android:label="fragment_game_detail"
-        tools:layout="@layout/fragment_game_detail" />
     <fragment
         android:id="@+id/listDetailFragment"
         android:name="com.example.questlog.ListDetailFragment"
         android:label="fragment_list_detail"
-        tools:layout="@layout/fragment_list_detail" />
+        tools:layout="@layout/fragment_list_detail" >
+        <action
+            android:id="@+id/action_listDetailFragment_to_listsFragment"
+            app:destination="@id/listsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.example.questlog.Playlist"
+        android:label="fragment_playlist"
+        tools:layout="@layout/fragment_playlist" >
+        <action
+            android:id="@+id/action_playlist2_to_listsFragment"
+            app:destination="@id/listsFragment" />
+        <action
+            android:id="@+id/action_playlist2_to_gamesFragment"
+            app:destination="@id/gamesFragment" />
+        <action
+            android:id="@+id/action_playlist2_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
+        <action
+            android:id="@+id/action_playlistFragment_to_playlistDetailFragment"
+            app:destination="@id/playlistDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reviewsFragment"
         android:name="com.example.questlog.ReviewsFragment"
@@ -55,10 +84,32 @@
         <action
             android:id="@+id/action_reviewsFragment_to_reviewDetailFragment"
             app:destination="@id/reviewDetailFragment" />
+        <action
+            android:id="@+id/action_reviewsFragment_to_playlist2"
+            app:destination="@id/playlistFragment" />
+        <action
+            android:id="@+id/action_reviewsFragment_to_listsFragment"
+            app:destination="@id/listsFragment" />
+        <action
+            android:id="@+id/action_reviewsFragment_to_gamesFragment2"
+            app:destination="@id/gamesFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewDetailFragment"
         android:name="com.example.questlog.ReviewDetailFragment"
         android:label="fragment_review_detail"
-        tools:layout="@layout/fragment_review_detail" />
+        tools:layout="@layout/fragment_review_detail" >
+        <action
+            android:id="@+id/action_reviewDetailFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistDetailFragment"
+        android:name="com.example.questlog.PlaylistDetail"
+        android:label="fragment_playlist_detail"
+        tools:layout="@layout/fragment_playlist_detail" >
+        <action
+            android:id="@+id/action_playlistDetailFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+    </fragment>
 </navigation>
