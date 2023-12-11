@@ -2,4 +2,41 @@
     <string name="app_name">QuestLog</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- Game Information Arrays -->
+    <!-- Each array represents a game's information, indexed by game IDs -->
+    <!-- The order of elements in each array is: name, description, user rating, general rating -->
+
+    <!-- Array for Grill On Wheels -->
+    <string-array name="game_1">
+        <item>Grill On Wheels</item>
+        <item>A thrilling cooking adventure on wheels!</item>
+        <item>4</item> <!-- User Rating -->
+        <item>85</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Baldur's Gate 3 -->
+    <string-array name="game_2">
+        <item>Baldur\'s Gate 3</item>
+        <item>An epic RPG experience in the world of Dungeons n Dragons.</item>
+        <item>5</item> <!-- User Rating -->
+        <item>90</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Alan Wake 2 -->
+    <string-array name="game_3">
+        <item>Alan Wake 2</item>
+        <item>Continuation of Alan Wake\'s mysterious and suspenseful story.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>88</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Mansion Mystery -->
+    <string-array name="game_4">
+        <item>Mansion Mystery</item>
+        <item>Solve the secrets hidden within a haunted mansion!</item>
+        <item>3</item> <!-- User Rating -->
+        <item>75</item> <!-- General Rating -->
+    </string-array>
 </resources>

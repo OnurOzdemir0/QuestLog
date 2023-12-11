@@ -9,7 +9,7 @@
         android:id="@+id/game_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/game_alanwake2"
+        android:src="@drawable/i_3"
         android:scaleType="centerCrop"
         android:padding="8dp" />
 

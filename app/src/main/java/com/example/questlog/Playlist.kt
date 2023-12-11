@@ -107,7 +107,7 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>) : Recycle
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val playlist_listing = playlist_items[position]
         holder.gameName.text ="Alan Wake 2"
-        holder.gameImage.setImageResource(R.drawable.game_alanwake2)
+        holder.gameImage.setImageResource(R.drawable.i_3)
         holder.generalScore.text = 80.toString()
         holder.userScore.text  = 80.toString()
         holder.statusButton.setOnClickListener{

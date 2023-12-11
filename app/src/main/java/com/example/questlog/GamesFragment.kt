@@ -57,8 +57,19 @@ class GamesAdapter(private val gamesList: List<Game>) : RecyclerView.Adapter<Gam
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val game = gamesList[position]
         holder.textView.text = game.name
-        holder.imageView.setImageResource(R.drawable.game_alanwake2)
+        val iconName = getIconName(game.gameID)
+        val resourceId = holder.itemView.context.resources.getIdentifier(iconName, "drawable", holder.itemView.context.packageName)
+        if (resourceId != 0) { // Resource exists
+            holder.imageView.setImageResource(resourceId)
+        } else {
+            holder.imageView.setImageResource(R.drawable.i_1)
+        }
     }
+
+    fun getIconName(gameId: Int): String {
+        return "i_${gameId}" // You will need to adjust this pattern to match your actual image names
+    }
+
 
     override fun getItemCount(): Int = gamesList.size
 }
