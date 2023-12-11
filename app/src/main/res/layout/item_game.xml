@@ -20,4 +20,11 @@
         android:layout_gravity="center_vertical"
         android:padding="8dp"
         android:text="Game Name" />
+
+    <Button
+        android:id="@+id/game_add_to_playlist"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:text="Button" />
 </LinearLayout>

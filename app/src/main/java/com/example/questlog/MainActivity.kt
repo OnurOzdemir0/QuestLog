@@ -3,8 +3,10 @@ package com.example.questlog
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.questlog.viewmodel.PlaylistViewModel
 
 enum class FragmentName{
     Games,Playlist,Reviews,Lists
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var reviewsButton: Button;
     private lateinit var listsButton: Button;
     private var currentFragment : FragmentName = FragmentName.Games;
-
+    private  lateinit var  shaderPlaylistViewModel: PlaylistViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         playlistButton = findViewById(R.id.playlist_page_button);
         reviewsButton = findViewById(R.id.reviews_page_button);
         listsButton = findViewById(R.id.lists_page_button);
-
+        shaderPlaylistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
         gamesButton.setOnClickListener{
             navigateToDestination(currentFragment,FragmentName.Games);
             currentFragment = FragmentName.Games;

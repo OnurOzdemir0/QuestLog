@@ -12,15 +12,18 @@ import android.widget.PopupMenu
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.questlog.viewmodel.PlaylistViewModel
 
 
 class Playlist : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var searchView: SearchView ;
     private lateinit var recyclerView: RecyclerView;
-
+    private lateinit var playlistViewModel: PlaylistViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +33,7 @@ class Playlist : Fragment() {
         val view = inflater.inflate(R.layout.fragment_playlist, container, false)
         searchView = view.findViewById(R.id.playlist_search)
         recyclerView = view.findViewById(R.id.playlist_recyclerview)
+        playlistViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
         // Inflate the layout for this fragment
         return view
     }
@@ -38,17 +42,15 @@ class Playlist : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = PlaylistAdapter(getPlaylist())
+        playlistViewModel.listings.observe(viewLifecycleOwner) { newList ->
+
+            recyclerView.adapter = PlaylistAdapter(getPlaylist())
+        }
+
     }
 
     private fun getPlaylist(): List<Playlist_Item> {
-        return listOf(
-            Playlist_Item(Game(gameID = 1, name = "Game 1", desc = "Description for Game 1"),GameStatus.PlanningToPlay),
-            Playlist_Item(Game(gameID = 2, name = "Game 2", desc = "Description for Game 2"),GameStatus.Playing),
-            Playlist_Item(Game(gameID = 3, name = "Game 3", desc = "Description for Game 3"),GameStatus.Finished),
-            Playlist_Item(Game(gameID = 4, name = "Game 4", desc = "Description for Game 4"),GameStatus.Dropped)
-
-        )
+        return playlistViewModel.getDataList()
     }
 
 
@@ -63,7 +65,7 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>) : Recycle
         val generalScore : TextView = view.findViewById(R.id.playlist_game_general_score);
         val userScore : TextView = view.findViewById(R.id.playlist_user_score);
         val statusButton : Button = view.findViewById(R.id.playlist_status_button);
-        private val statusMenu  = PopupMenu(view.context,statusButton)
+        val statusMenu  = PopupMenu(view.context,statusButton)
         private var first : Boolean = true
 
 
@@ -106,15 +108,36 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>) : Recycle
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         val playlist_listing = playlist_items[position]
-        holder.gameName.text ="Alan Wake 2"
-        holder.gameImage.setImageResource(R.drawable.i_3)
+        holder.gameName.text =playlist_listing.game.name
+
+        val iconName = "i_${playlist_listing.game.gameID}"
+        val resourceId = holder.itemView.context.resources.getIdentifier(iconName, "drawable", holder.itemView.context.packageName)
+        if (resourceId != 0) { // Resource exists
+            holder.gameImage.setImageResource(resourceId)
+        } else {
+            holder.gameImage.setImageResource(R.drawable.i_1)
+        }
         holder.generalScore.text = 80.toString()
         holder.userScore.text  = 80.toString()
+
+        when (playlist_listing.gameStatus) {
+
+            GameStatus.Playing -> {holder.statusButton.text = "Playing"
+                }
+            GameStatus.PlanningToPlay -> {holder.statusButton.text = "Planning to play"
+                 }
+            GameStatus.Dropped-> {holder.statusButton.text = "Dropped"
+                 }
+            GameStatus.Finished -> {holder.statusButton.text = "finished"
+                 }
+
+        }
         holder.statusButton.setOnClickListener{
             val newStatus = holder.showStatusMenu(playlist_listing.gameStatus);
             playlist_listing.gameStatus = newStatus;
             println(playlist_listing.gameStatus)
         }
+
 
 
     }
