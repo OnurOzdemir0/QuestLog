@@ -33,12 +33,19 @@ class GamesFragment : Fragment() {
     }
 
     private fun getMockGames(): List<Game> {
-        return listOf(
-            Game(gameID = 1, name = "Game 1", desc = "Description for Game 1"),
-            Game(gameID = 2, name = "Game 2", desc = "Description for Game 2"),
-            Game(gameID = 3, name = "Game 3", desc = "Description for Game 3"),
-            Game(gameID = 4, name = "Game 4", desc = "Description for Game 4")
-        )
+        val context = requireContext()
+        val resources = context.resources
+
+        return (1..4).map { gameId ->
+            val gameInfo = resources.getStringArray(resources.getIdentifier("game_$gameId", "array", context.packageName))
+            Game(
+                gameID = gameId,
+                name = gameInfo[0],
+                desc = gameInfo[1],
+                userRating = gameInfo[2].toInt(),
+                generalRating = gameInfo[3].toInt()
+            )
+        }
     }
 }
 
@@ -57,7 +64,8 @@ class GamesAdapter(private val gamesList: List<Game>) : RecyclerView.Adapter<Gam
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val game = gamesList[position]
         holder.textView.text = game.name
-        val iconName = getIconName(game.gameID)
+
+        val iconName = "i_${game.gameID}"
         val resourceId = holder.itemView.context.resources.getIdentifier(iconName, "drawable", holder.itemView.context.packageName)
         if (resourceId != 0) { // Resource exists
             holder.imageView.setImageResource(resourceId)
@@ -65,11 +73,6 @@ class GamesAdapter(private val gamesList: List<Game>) : RecyclerView.Adapter<Gam
             holder.imageView.setImageResource(R.drawable.i_1)
         }
     }
-
-    fun getIconName(gameId: Int): String {
-        return "i_${gameId}" // You will need to adjust this pattern to match your actual image names
-    }
-
 
     override fun getItemCount(): Int = gamesList.size
 }
