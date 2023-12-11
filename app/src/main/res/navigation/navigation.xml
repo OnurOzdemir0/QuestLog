@@ -11,16 +11,24 @@
         tools:layout="@layout/fragment_games" >
         <action
             android:id="@+id/action_gamesFragment_to_gameDetailFragment"
-            app:destination="@id/gameDetailFragment" />
+            app:destination="@id/gameDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_gamesFragment_to_listsFragment2"
-            app:destination="@id/listsFragment" />
+            app:destination="@id/listsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_gamesFragment_to_playlist2"
-            app:destination="@id/playlistFragment" />
+            app:destination="@id/playlistFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_gamesFragment_to_reviewsFragment2"
-            app:destination="@id/reviewsFragment" />
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/gameDetailFragment"
@@ -29,7 +37,9 @@
         tools:layout="@layout/fragment_game_detail" >
         <action
             android:id="@+id/action_gameDetailFragment_to_gamesFragment"
-            app:destination="@id/gamesFragment" />
+            app:destination="@id/gamesFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/listsFragment"
@@ -38,16 +48,24 @@
         tools:layout="@layout/fragment_lists" >
         <action
             android:id="@+id/action_listsFragment_to_gamesFragment"
-            app:destination="@id/gamesFragment" />
+            app:destination="@id/gamesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_listsFragment_to_listDetailFragment"
-            app:destination="@id/listDetailFragment" />
+            app:destination="@id/listDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_listsFragment_to_playlist2"
-            app:destination="@id/playlistFragment" />
+            app:destination="@id/playlistFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_listsFragment_to_reviewsFragment"
-            app:destination="@id/reviewsFragment" />
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/listDetailFragment"
@@ -56,7 +74,9 @@
         tools:layout="@layout/fragment_list_detail" >
         <action
             android:id="@+id/action_listDetailFragment_to_listsFragment"
-            app:destination="@id/listsFragment" />
+            app:destination="@id/listsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/playlistFragment"
@@ -65,16 +85,24 @@
         tools:layout="@layout/fragment_playlist" >
         <action
             android:id="@+id/action_playlist2_to_listsFragment"
-            app:destination="@id/listsFragment" />
+            app:destination="@id/listsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_playlist2_to_gamesFragment"
-            app:destination="@id/gamesFragment" />
+            app:destination="@id/gamesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_playlist2_to_reviewsFragment"
-            app:destination="@id/reviewsFragment" />
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_playlistFragment_to_playlistDetailFragment"
-            app:destination="@id/playlistDetailFragment" />
+            app:destination="@id/playlistDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/reviewsFragment"
@@ -83,16 +111,24 @@
         tools:layout="@layout/fragment_reviews" >
         <action
             android:id="@+id/action_reviewsFragment_to_reviewDetailFragment"
-            app:destination="@id/reviewDetailFragment" />
+            app:destination="@id/reviewDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_reviewsFragment_to_playlist2"
-            app:destination="@id/playlistFragment" />
+            app:destination="@id/playlistFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_reviewsFragment_to_listsFragment"
-            app:destination="@id/listsFragment" />
+            app:destination="@id/listsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_reviewsFragment_to_gamesFragment2"
-            app:destination="@id/gamesFragment" />
+            app:destination="@id/gamesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/reviewDetailFragment"
@@ -101,7 +137,9 @@
         tools:layout="@layout/fragment_review_detail" >
         <action
             android:id="@+id/action_reviewDetailFragment_to_reviewsFragment"
-            app:destination="@id/reviewsFragment" />
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/playlistDetailFragment"
@@ -110,6 +148,8 @@
         tools:layout="@layout/fragment_playlist_detail" >
         <action
             android:id="@+id/action_playlistDetailFragment_to_playlistFragment"
-            app:destination="@id/playlistFragment" />
+            app:destination="@id/playlistFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>
