@@ -11,11 +11,5 @@ class Game(
     val reviews: List<Review>? = null
 )
 
-class Review(
-    val reviewID: Int,
-    val gameID: Int,
-    val userID: Int,
-    val rating: Int? = null,
-    val reviewText: String
-)
+
 
