@@ -40,6 +40,7 @@
             app:destination="@id/gamesFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <argument android:name="Game" />
     </fragment>
     <fragment
         android:id="@+id/listsFragment"
