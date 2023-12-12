@@ -1,43 +1,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorPrimary"
     android:orientation="vertical"
     android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/review_game_image"
         android:layout_width="364dp"
         android:layout_height="200dp"
+        android:contentDescription="TODO"
         android:padding="8dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/i_3"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/i_3" />
 
     <TextView
         android:id="@+id/review_game_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Game Name"
-        android:textSize="24sp"
+        android:fontFamily="sans-serif-black"
         android:paddingTop="8dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:text="Game Name"
+        android:textColor="@color/SearchBar"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/review_game_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:text="Game Description"
-        android:paddingBottom="16dp" />
+        android:textColor="@color/SearchBar" />
 
     <Button
         android:id="@+id/review_recommend_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="@color/material_dynamic_neutral20"
+        android:fontFamily="@font/alatsi"
         android:padding="8dp"
-        android:text="Do You Recommend It" />
+        android:text="Do You Recommend It"
+        android:textColor="@color/teal_200" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,6 +106,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/SearchBar"
             android:orientation="vertical"
             android:padding="16dp">
 

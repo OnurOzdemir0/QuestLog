@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="572dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/linerLayout"
         android:layout_marginTop="12dp"
         app:defaultNavHost="true"
@@ -28,8 +29,11 @@
             android:id="@+id/app_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:fontFamily="@font/press_start_2p"
             android:text="QuestLog"
             android:textAlignment="center"
+            android:textColor="@color/teal_200"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -47,28 +51,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Games" />
+                android:background="@color/material_dynamic_neutral_variant20"
+                android:text="Games"
+                android:textColor="@color/teal_200" />
 
             <Button
                 android:id="@+id/playlist_page_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Playlist" />
+                android:background="@color/material_dynamic_secondary10"
+                android:backgroundTint="@color/material_dynamic_neutral_variant20"
+                android:fontFamily="@font/alatsi"
+                android:text="Playlist"
+                android:textColor="@color/teal_200" />
 
             <Button
                 android:id="@+id/reviews_page_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Reviews" />
+                android:background="@color/material_dynamic_neutral_variant20"
+                android:fontFamily="@font/alatsi"
+                android:text="Reviews"
+                android:textColor="@color/teal_200" />
 
             <Button
                 android:id="@+id/lists_page_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Lists" />
+                android:background="@color/material_dynamic_neutral_variant20"
+                android:fontFamily="@font/alatsi"
+                android:text="Lists"
+                android:textColor="@color/teal_200" />
         </LinearLayout>
 
     </LinearLayout>
