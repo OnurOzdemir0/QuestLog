@@ -44,7 +44,7 @@ class Playlist : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         playlistViewModel.listings.observe(viewLifecycleOwner) { newList ->
 
-            recyclerView.adapter = PlaylistAdapter(getPlaylist())
+            recyclerView.adapter = PlaylistAdapter(getPlaylist(),playlistViewModel)
         }
 
     }
@@ -57,7 +57,7 @@ class Playlist : Fragment() {
 }
 
 
-class PlaylistAdapter(private val playlist_items: List<Playlist_Item>) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
+class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private val playlistViewModel: PlaylistViewModel) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
 
     class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val gameImage: ImageView = view.findViewById(R.id.playlist_game_image)
@@ -69,32 +69,33 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>) : Recycle
         private var first : Boolean = true
 
 
-        public  fun showStatusMenu( prevStatus: GameStatus ) : GameStatus{
+        public  fun showStatusMenu( index: Int , playlistViewModel: PlaylistViewModel ) {
             if(first){
                 statusMenu.inflate(R.menu.status_change_menu)
                 first = false
             }
 
             statusMenu.show()
-            var currentStatus : GameStatus = prevStatus;
+
             statusMenu.setOnMenuItemClickListener{item :MenuItem ->
 
                 when (item.itemId) {
 
                     R.id.playing -> {statusButton.text = "Playing"
-                                    currentStatus = GameStatus.Playing}
+                                    playlistViewModel.changePlayListItemStatus(index,GameStatus.Playing)
+                                   }
                     R.id.planning_to_play -> {statusButton.text = "Planning to play"
-                        currentStatus = GameStatus.PlanningToPlay}
+                        playlistViewModel.changePlayListItemStatus(index,GameStatus.PlanningToPlay)}
                     R.id.dropped -> {statusButton.text = "Dropped"
-                    currentStatus= GameStatus.Dropped}
+                        playlistViewModel.changePlayListItemStatus(index,GameStatus.Dropped)}
                     R.id.finished -> {statusButton.text = "finished"
-                    currentStatus= GameStatus.Finished}
+                        playlistViewModel.changePlayListItemStatus(index,GameStatus.Finished)}
 
                 }
 
                 true
             }
-            return currentStatus
+
         }
 
 
@@ -107,20 +108,25 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>) : Recycle
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        val playlist_listing = playlist_items[position]
-        holder.gameName.text =playlist_listing.game.name
+        val playlistListing = playlist_items[position]
+        holder.gameName.text =playlistListing.game.name
 
-        val iconName = "i_${playlist_listing.game.gameID}"
+        val iconName = "i_${playlistListing.game.gameID}"
         val resourceId = holder.itemView.context.resources.getIdentifier(iconName, "drawable", holder.itemView.context.packageName)
         if (resourceId != 0) { // Resource exists
             holder.gameImage.setImageResource(resourceId)
         } else {
             holder.gameImage.setImageResource(R.drawable.i_1)
         }
-        holder.generalScore.text = 80.toString()
-        holder.userScore.text  = 80.toString()
+        holder.generalScore.text = playlistListing.game.generalRating.toString()
+        if (playlistListing.game.userRating != null){
+            holder.userScore.text  = playlistListing.game.userRating.toString()
+        }else{
+            holder.userScore.text = "N/A"
+        }
 
-        when (playlist_listing.gameStatus) {
+
+        when (playlistListing.gameStatus) {
 
             GameStatus.Playing -> {holder.statusButton.text = "Playing"
                 }
@@ -133,9 +139,11 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>) : Recycle
 
         }
         holder.statusButton.setOnClickListener{
-            val newStatus = holder.showStatusMenu(playlist_listing.gameStatus);
-            playlist_listing.gameStatus = newStatus;
-            println(playlist_listing.gameStatus)
+            holder.showStatusMenu(position,playlistViewModel);
+
+        }
+        holder.userScore.setOnClickListener{
+
         }
 
 

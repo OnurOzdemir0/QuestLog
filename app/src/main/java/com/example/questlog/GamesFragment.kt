@@ -66,32 +66,48 @@ class GamesAdapter(private val gamesList: List<Game>,private val playlistViewMod
         val addButton : Button = view.findViewById(R.id.game_add_to_playlist)
         private val statusMenu  = PopupMenu(view.context,addButton)
         var first :Boolean = true;
-        public  fun showStatusMenu(  ) : GameStatus?{
-            if(first){
+        public  fun showStatusMenu( game : Game, playlistViewModel: PlaylistViewModel   ) {
+            if (first) {
                 statusMenu.inflate(R.menu.status_change_menu)
                 first = false
             }
 
-            statusMenu.show()
-            var currentStatus : GameStatus? = null;
-            statusMenu.setOnMenuItemClickListener{item : MenuItem ->
 
-                when (item.itemId) {
 
-                    R.id.playing -> {
-                        currentStatus = GameStatus.Playing}
-                    R.id.planning_to_play -> {
-                        currentStatus = GameStatus.PlanningToPlay}
-                    R.id.dropped -> {
-                        currentStatus= GameStatus.Dropped}
-                    R.id.finished -> {
-                        currentStatus= GameStatus.Finished}
 
+                statusMenu.show()
+
+
+                statusMenu.setOnMenuItemClickListener { item: MenuItem ->
+
+                    when (item.itemId) {
+
+                        R.id.playing -> {
+                            addButton.text = "Playing"
+                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.Playing))
+                        }
+
+                        R.id.planning_to_play -> {
+                            addButton.text = "Planning To Play"
+                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.PlanningToPlay))
+                        }
+
+                        R.id.dropped -> {
+                            addButton.text = "Dropped"
+                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.Dropped))
+                        }
+
+                        R.id.finished -> {
+                            addButton.text = "Finished"
+                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.Finished))
+                        }
+
+                    }
+
+                    true
                 }
 
-                true
-            }
-            return currentStatus
+
         }
     }
 
@@ -110,9 +126,32 @@ class GamesAdapter(private val gamesList: List<Game>,private val playlistViewMod
         } else {
             holder.imageView.setImageResource(R.drawable.i_1)
         }
+
+        var doesExist = false
+        for (item in playlistViewModel.getDataList()) {
+            if (item.game.gameID == game.gameID){
+                doesExist = true
+                when (item.gameStatus) {
+
+                    GameStatus.Playing -> {holder.addButton.text = "Playing"
+                    }
+                    GameStatus.PlanningToPlay -> {holder.addButton.text = "Planning to play"
+                    }
+                    GameStatus.Dropped-> {holder.addButton.text = "Dropped"
+                    }
+                    GameStatus.Finished -> {holder.addButton.text = "finished"
+                    }
+
+                }
+
+            }
+
+        }
+
         holder.addButton.setOnClickListener{
-            val status = holder.showStatusMenu() ?: GameStatus.PlanningToPlay
-            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,status))
+            if (!doesExist) {
+                holder.showStatusMenu(game, playlistViewModel)
+            }
         }
     }
 

@@ -4,6 +4,8 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.questlog.Game
+import com.example.questlog.GameStatus
 import com.example.questlog.Playlist_Item
 
 class PlaylistViewModel : ViewModel() {
@@ -22,6 +24,12 @@ class PlaylistViewModel : ViewModel() {
     }
     fun getDataList() : List<Playlist_Item>{
         return listings.value ?: mutableListOf()
+    }
+
+    fun changePlayListItemStatus(index : Int,status : GameStatus){
+        val currentList = _listings.value ?: mutableListOf()
+        currentList[index].gameStatus =  status
+        _listings.value = currentList
     }
 
 
