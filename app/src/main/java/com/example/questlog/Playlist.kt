@@ -1,5 +1,6 @@
 package com.example.questlog
 
+import ReviewViewModel
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
@@ -18,9 +19,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questlog.viewmodel.PlaylistViewModel
+
+import androidx.navigation.fragment.findNavController
 
 
 class Playlist : Fragment() {
@@ -28,6 +34,8 @@ class Playlist : Fragment() {
     private lateinit var searchView: SearchView ;
     private lateinit var recyclerView: RecyclerView;
     private lateinit var playlistViewModel: PlaylistViewModel
+    private  lateinit var  reviewViewModel: ReviewViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +46,7 @@ class Playlist : Fragment() {
         searchView = view.findViewById(R.id.playlist_search)
         recyclerView = view.findViewById(R.id.playlist_recyclerview)
         playlistViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
+        reviewViewModel  = ViewModelProvider(requireActivity()).get(ReviewViewModel::class.java)
         // Inflate the layout for this fragment
         return view
     }
@@ -48,7 +57,7 @@ class Playlist : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         playlistViewModel.listings.observe(viewLifecycleOwner) { newList ->
 
-            recyclerView.adapter = PlaylistAdapter(getPlaylist(),playlistViewModel)
+            recyclerView.adapter = PlaylistAdapter(getPlaylist(),playlistViewModel,reviewViewModel)
         }
 
     }
@@ -61,7 +70,7 @@ class Playlist : Fragment() {
 }
 
 
-class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private val playlistViewModel: PlaylistViewModel) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
+class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private val playlistViewModel: PlaylistViewModel,private val reviewViewModel: ReviewViewModel) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
 
     class PlaylistViewHolder(private  val view: View) : RecyclerView.ViewHolder(view) {
         val gameImage: ImageView = view.findViewById(R.id.playlist_game_image)
@@ -72,6 +81,7 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private va
         val statusMenu  = PopupMenu(view.context,statusButton)
         val userScoreBar : ProgressBar = view.findViewById(R.id.user_score_progress_bar)
         val generalScoreBar: ProgressBar = view.findViewById(R.id.general_score_progress_bar)
+        val addReviewButton : Button = view.findViewById(R.id.playlist_add_review)
         private var first : Boolean = true
 
         public  fun showRateDialog(index: Int, playlistViewModel: PlaylistViewModel){
@@ -180,6 +190,17 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private va
         }
         holder.userScore.setOnClickListener{
             holder.showRateDialog(position,playlistViewModel)
+        }
+
+        holder.addReviewButton.setOnClickListener{
+           val navController =  holder.itemView.findNavController()
+            var doesExist = false
+            for (item in reviewViewModel.getReviewList()) {
+                if (item.game.gameID == playlistListing.game.gameID)
+                    doesExist = true
+            }
+            if(!doesExist)
+                reviewViewModel.addNewReview(Review(playlistListing.game, "", false))
         }
 
 

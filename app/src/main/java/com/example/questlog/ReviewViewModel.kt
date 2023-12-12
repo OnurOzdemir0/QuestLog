@@ -11,7 +11,7 @@ class ReviewViewModel : ViewModel() {
     private val _reviews = MutableLiveData<List<Review>>()
 
     val reviews: LiveData<List<Review>> get() = _reviews
-
+    /*
     init {
         // Populate with mock data
         val mockUser1 = Game(1, "Game 1", "Description 1", 85, 78, )
@@ -22,7 +22,7 @@ class ReviewViewModel : ViewModel() {
 
         _reviews.value = listOf(mockReview1, mockReview2)
     }
-
+*/
     fun addNewReview(review: Review) {
         val currentList = _reviews.value.orEmpty().toMutableList()
         currentList.add(review)

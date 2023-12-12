@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var playlistButton: Button;
     private lateinit var reviewsButton: Button;
     private lateinit var listsButton: Button;
+
+    private lateinit var  reviewButtonInPlaylist : Button;
     private var currentFragment : FragmentName = FragmentName.Games;
     private  lateinit var  shaderPlaylistViewModel: PlaylistViewModel
     private  lateinit var  sharedReviewViewModel: ReviewViewModel
@@ -41,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         playlistButton = findViewById(R.id.playlist_page_button);
         reviewsButton = findViewById(R.id.reviews_page_button);
         listsButton = findViewById(R.id.lists_page_button);
+
+
+
         shaderPlaylistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
         sharedReviewViewModel = ViewModelProvider(this).get(ReviewViewModel::class.java)
         gamesButton.setOnClickListener{
