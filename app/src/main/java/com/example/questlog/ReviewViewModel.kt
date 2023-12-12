@@ -14,8 +14,8 @@ class ReviewViewModel : ViewModel() {
 
     init {
         // Populate with mock data
-        val mockUser1 = Game(1, "Game 1", "Description 1", 85, 78, )
-        val mockUser2 = Game(2, "Game 2", "Description 2", 90, 82, )
+        val mockUser1 = Game(1, "Grill On Wheels", "Highly Recommend", 85, 78, )
+        val mockUser2 = Game(2, "Baldur's Gate", "Recommend", 90, 82, )
 
         val mockReview1 = Review(mockUser1, "This game is awesome!")
         val mockReview2 = Review(mockUser2, "Not bad, but could be better.")

@@ -1,5 +1,6 @@
 package com.example.questlog
 
+import ReviewPopupFragment
 import ReviewViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -38,12 +39,6 @@ class ReviewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-
-
-
         recyclerView.layoutManager = LinearLayoutManager(context)
 
 
@@ -54,7 +49,37 @@ class ReviewsFragment : Fragment() {
                 review?.isRecommended = isRecommended
                 // Perform any additional actions based on the recommendation status
             }
+
+            reviewViewModel.reviews.observe(viewLifecycleOwner) {
+                recyclerView.adapter = ReviewAdapter(it) { position, isRecommended ->
+                    val review = reviewViewModel.reviews.value?.get(position)
+                    review?.isRecommended = isRecommended
+
+                    // Show review popup
+                    showReviewPopup { reviewText ->
+                        // Handle review submission, e.g., save the reviewText to your ViewModel
+                        // You may also want to update the UI with the new review data
+                    }
+                }
+            }
+
+
+
         }
+
+
+
+
+    }
+
+    private fun showReviewPopup(onReviewSubmitted: (String) -> Unit) {
+        val reviewPopup = ReviewPopupFragment()
+        reviewPopup.setReviewListener(object : ReviewPopupFragment.ReviewListener {
+            override fun onReviewSubmitted(reviewText: String) {
+                onReviewSubmitted.invoke(reviewText)
+            }
+        })
+        reviewPopup.show(parentFragmentManager, "ReviewPopupFragment")
     }
 
     private fun getReview(): List<Review> {
