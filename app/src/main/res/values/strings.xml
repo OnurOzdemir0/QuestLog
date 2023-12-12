@@ -39,4 +39,170 @@
         <item>3</item> <!-- User Rating -->
         <item>75</item> <!-- General Rating -->
     </string-array>
+
+    <string-array name="game_5">
+        <item>Cyberpunk 2077</item>
+        <item>An open-world RPG set in a dystopian future.</item>
+        <item>3</item> <!-- User Rating -->
+        <item>70</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for The Witcher 3: Wild Hunt -->
+    <string-array name="game_6">
+        <item>The Witcher 3: Wild Hunt</item>
+        <item>Embark on a fantasy adventure as Geralt of Rivia.</item>
+        <item>5</item> <!-- User Rating -->
+        <item>95</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Grand Theft Auto V -->
+    <string-array name="game_7">
+        <item>Grand Theft Auto V</item>
+        <item>Explore the criminal underworld in a fictional Los Angeles.</item>
+        <item>0</item> <!-- User Rating -->
+        <item>88</item> <!-- General Rating -->
+    </string-array>
+    <!-- Array for The Legend of Zelda: Breath of the Wild -->
+    <string-array name="game_8">
+        <item>The Legend of Zelda: Breath of the Wild</item>
+        <item>Embark on an epic journey in the land of Hyrule.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>95</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Red Dead Redemption 2 -->
+    <string-array name="game_9">
+        <item>Red Dead Redemption 2</item>
+        <item>Live the life of an outlaw in the American Wild West.</item>
+        <item>0</item> <!-- User Rating -->
+        <item>92</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Halo Infinite -->
+    <string-array name="game_10">
+        <item>Halo Infinite</item>
+        <item>Join Master Chief in the fight against the Covenant.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>88</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Elden Ring -->
+    <string-array name="game_11">
+        <item>Elden Ring</item>
+        <item>Discover a dark fantasy world in this action RPG.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>93</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Assassin's Creed Valhalla -->
+    <string-array name="game_12">
+        <item>Assassin\'s Creed Valhalla</item>
+        <item>Lead a Viking invasion in the age of the Vikings.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>89</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Ghost of Tsushima -->
+    <string-array name="game_13">
+        <item>Ghost of Tsushima</item>
+        <item>Become a samurai in feudal Japan and protect your homeland.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>91</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Resident Evil Village -->
+    <string-array name="game_14">
+        <item>Resident Evil Village</item>
+        <item>Survive the horrors of a mysterious village in this survival horror game.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>87</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Metroid Dread -->
+    <string-array name="game_15">
+        <item>Metroid Dread</item>
+        <item>Guide Samus Aran in her mission to confront a deadly enemy.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>88</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Deathloop -->
+    <string-array name="game_16">
+        <item>Deathloop</item>
+        <item>Break the time loop in a stylish first-person shooter.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>86</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Returnal -->
+    <string-array name="game_17">
+        <item>Returnal</item>
+        <item>Survive a hostile alien planet in this roguelike shooter.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>85</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Far Cry 6 -->
+    <string-array name="game_18">
+        <item>Far Cry 6</item>
+        <item>Fight against a ruthless dictator in a tropical paradise.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>88</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Horizon Forbidden West -->
+    <string-array name="game_19">
+        <item>Horizon Forbidden West</item>
+        <item>Explore a post-apocalyptic world with advanced robotic creatures.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>92</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for God of War (2018) -->
+    <string-array name="game_20">
+        <item>God of War (2018)</item>
+        <item>Join Kratos on a journey to the Norse realms in this action-adventure.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>94</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Halo: The Master Chief Collection -->
+    <string-array name="game_21">
+        <item>Halo: The Master Chief Collection</item>
+        <item>Experience the iconic Halo franchise in one collection.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>90</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Resident Evil 2 Remake -->
+    <string-array name="game_22">
+        <item>Resident Evil 2 Remake</item>
+        <item>Relive the horror classic with modern graphics and gameplay.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>91</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for The Last of Us Part II -->
+    <string-array name="game_23">
+        <item>The Last of Us Part II</item>
+        <item>Continue Ellie and Joel\'s journey in a post-apocalyptic world.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>93</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Final Fantasy VII Remake -->
+    <string-array name="game_24">
+        <item>Final Fantasy VII Remake</item>
+        <item>Experience the iconic RPG with stunning graphics and new gameplay.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>89</item> <!-- General Rating -->
+    </string-array>
+
+    <!-- Array for Demon's Souls (2020) -->
+    <string-array name="game_25">
+        <item>Demon\'s Souls (2020)</item>
+        <item>Challenge yourself in a visually stunning remake of the classic action RPG.</item>
+        <item>4</item> <!-- User Rating -->
+        <item>88</item> <!-- General Rating -->
+    </string-array>
 </resources>

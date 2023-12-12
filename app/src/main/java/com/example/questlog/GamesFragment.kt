@@ -44,7 +44,7 @@ class GamesFragment : Fragment() {
         val context = requireContext()
         val resources = context.resources
 
-        return (1..4).map { gameId ->
+        return (1..15).map { gameId ->
             val gameInfo = resources.getStringArray(resources.getIdentifier("game_$gameId", "array", context.packageName))
             Game(
                 gameID = gameId,
