@@ -1,5 +1,6 @@
 package com.example.questlog
 
+import ReviewViewModel
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var listsButton: Button;
     private var currentFragment : FragmentName = FragmentName.Games;
     private  lateinit var  shaderPlaylistViewModel: PlaylistViewModel
+    private  lateinit var  sharedReviewViewModel: ReviewViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         reviewsButton = findViewById(R.id.reviews_page_button);
         listsButton = findViewById(R.id.lists_page_button);
         shaderPlaylistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
+        sharedReviewViewModel = ViewModelProvider(this).get(ReviewViewModel::class.java)
         gamesButton.setOnClickListener{
             navigateToDestination(currentFragment,FragmentName.Games);
             currentFragment = FragmentName.Games;

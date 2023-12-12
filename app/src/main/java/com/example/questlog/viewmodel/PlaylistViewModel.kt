@@ -31,6 +31,11 @@ class PlaylistViewModel : ViewModel() {
         currentList[index].gameStatus =  status
         _listings.value = currentList
     }
+    fun changePlayListItemUserScore(index : Int,score : Int){
+        val currentList = _listings.value ?: mutableListOf()
+        currentList[index].game.userRating =  score
+        _listings.value = currentList
+    }
 
 
 }

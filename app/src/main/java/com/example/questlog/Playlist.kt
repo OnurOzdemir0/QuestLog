@@ -1,5 +1,7 @@
 package com.example.questlog
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,8 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -59,16 +63,44 @@ class Playlist : Fragment() {
 
 class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private val playlistViewModel: PlaylistViewModel) : RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder>() {
 
-    class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class PlaylistViewHolder(private  val view: View) : RecyclerView.ViewHolder(view) {
         val gameImage: ImageView = view.findViewById(R.id.playlist_game_image)
         val gameName: TextView = view.findViewById(R.id.playlist_game_name)
         val generalScore : TextView = view.findViewById(R.id.playlist_game_general_score);
         val userScore : TextView = view.findViewById(R.id.playlist_user_score);
         val statusButton : Button = view.findViewById(R.id.playlist_status_button);
         val statusMenu  = PopupMenu(view.context,statusButton)
+        val userScoreBar : ProgressBar = view.findViewById(R.id.user_score_progress_bar)
+        val generalScoreBar: ProgressBar = view.findViewById(R.id.general_score_progress_bar)
         private var first : Boolean = true
 
+        public  fun showRateDialog(index: Int, playlistViewModel: PlaylistViewModel){
 
+                val builder = AlertDialog.Builder(view.context)
+                val inflater : LayoutInflater =  LayoutInflater.from(view.context);
+                val rateDialogLayout = inflater.inflate(R.layout.rate_user_score_layout,null)
+                val editText : EditText = rateDialogLayout.findViewById(R.id.user_score_rating_edit_text)
+
+                builder.setTitle("Game Rating")
+
+                builder.setPositiveButton("Rate"){
+                    dialog, which -> var rating : Int  = editText.text.toString().toInt()
+
+                    if(rating<0)rating  = 0;
+                    if(rating>100) rating = 100
+
+                    userScore.text = rating.toString()
+                    userScoreBar.setProgress(rating,false)
+                    playlistViewModel.changePlayListItemUserScore(index,rating )
+                }
+                builder.setNegativeButton("Cancel"){dialog,which -> }
+                builder.setView(rateDialogLayout)
+
+                builder.show()
+
+
+
+        }
         public  fun showStatusMenu( index: Int , playlistViewModel: PlaylistViewModel ) {
             if(first){
                 statusMenu.inflate(R.menu.status_change_menu)
@@ -124,7 +156,11 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private va
         }else{
             holder.userScore.text = "N/A"
         }
+        holder.userScoreBar.isIndeterminate  =false
 
+        holder.userScoreBar.progress = (holder.userScore.text.toString().toInt())
+
+        holder.generalScoreBar.setProgress(holder.generalScore.text.toString().toInt(),false)
 
         when (playlistListing.gameStatus) {
 
@@ -143,7 +179,7 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private va
 
         }
         holder.userScore.setOnClickListener{
-
+            holder.showRateDialog(position,playlistViewModel)
         }
 
 
