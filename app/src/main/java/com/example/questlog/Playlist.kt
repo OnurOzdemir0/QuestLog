@@ -199,8 +199,11 @@ class PlaylistAdapter(private val playlist_items: List<Playlist_Item>,private va
                 if (item.game.gameID == playlistListing.game.gameID)
                     doesExist = true
             }
-            if(!doesExist)
+            if(!doesExist){
                 reviewViewModel.addNewReview(Review(playlistListing.game, "", false))
+                navController.navigate(R.id.action_playlist2_to_reviewsFragment)
+            }
+
         }
 
 

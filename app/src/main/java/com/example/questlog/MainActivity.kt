@@ -49,18 +49,22 @@ class MainActivity : AppCompatActivity() {
         shaderPlaylistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
         sharedReviewViewModel = ViewModelProvider(this).get(ReviewViewModel::class.java)
         gamesButton.setOnClickListener{
+            GetCurrentFragment()
             navigateToDestination(currentFragment,FragmentName.Games);
             currentFragment = FragmentName.Games;
         }
         playlistButton.setOnClickListener{
+            GetCurrentFragment()
             navigateToDestination(currentFragment,FragmentName.Playlist);
             currentFragment = FragmentName.Playlist;
         }
         reviewsButton.setOnClickListener{
+            GetCurrentFragment()
             navigateToDestination(currentFragment,FragmentName.Reviews);
             currentFragment = FragmentName.Reviews;
         }
         listsButton.setOnClickListener{
+            GetCurrentFragment()
             navigateToDestination(currentFragment,FragmentName.Lists);
             currentFragment = FragmentName.Lists;
         }
@@ -72,7 +76,30 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
     */
+    private fun GetCurrentFragment(){
+        val id = getIdOfCurrentFragment()
+           if( navController.currentDestination?.id != id){
+               setCurrentFragmentById(navController.currentDestination?.id)
+           }
+    }
+    private  fun getIdOfCurrentFragment(): Int{
+        return when(currentFragment){
+            FragmentName.Games -> R.id.gamesFragment
+            FragmentName.Reviews -> R.id.reviewsFragment
+            FragmentName.Playlist -> R.id.playlistFragment
+            else -> R.id.listsFragment
+        }
 
+    }
+    private  fun setCurrentFragmentById( id :Int?) {
+        when(id){
+            R.id.gamesFragment -> currentFragment = FragmentName.Games
+            R.id.reviewsFragment ->currentFragment = FragmentName.Reviews
+            R.id.playlistFragment ->currentFragment = FragmentName.Playlist
+            R.id.listsFragment -> currentFragment = FragmentName.Lists
+        }
+
+    }
     private fun navigateToDestination(from : FragmentName,to : FragmentName ){
         when(from){
             FragmentName.Games-> navigateFromGames(to);
