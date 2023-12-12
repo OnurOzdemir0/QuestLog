@@ -15,11 +15,6 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_gamesFragment_to_listsFragment2"
-            app:destination="@id/listsFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
             android:id="@+id/action_gamesFragment_to_playlist2"
             app:destination="@id/playlistFragment"
             app:enterAnim="@android:anim/fade_in"
@@ -43,52 +38,10 @@
         <argument android:name="Game" />
     </fragment>
     <fragment
-        android:id="@+id/listsFragment"
-        android:name="com.example.questlog.ListsFragment"
-        android:label="fragment_lists"
-        tools:layout="@layout/fragment_lists" >
-        <action
-            android:id="@+id/action_listsFragment_to_gamesFragment"
-            app:destination="@id/gamesFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_listsFragment_to_listDetailFragment"
-            app:destination="@id/listDetailFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_listsFragment_to_playlist2"
-            app:destination="@id/playlistFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_listsFragment_to_reviewsFragment"
-            app:destination="@id/reviewsFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/listDetailFragment"
-        android:name="com.example.questlog.ListDetailFragment"
-        android:label="fragment_list_detail"
-        tools:layout="@layout/fragment_list_detail" >
-        <action
-            android:id="@+id/action_listDetailFragment_to_listsFragment"
-            app:destination="@id/listsFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
-    </fragment>
-    <fragment
         android:id="@+id/playlistFragment"
         android:name="com.example.questlog.Playlist"
         android:label="fragment_playlist"
         tools:layout="@layout/fragment_playlist" >
-        <action
-            android:id="@+id/action_playlist2_to_listsFragment"
-            app:destination="@id/listsFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_playlist2_to_gamesFragment"
             app:destination="@id/gamesFragment"
@@ -118,11 +71,6 @@
         <action
             android:id="@+id/action_reviewsFragment_to_playlist2"
             app:destination="@id/playlistFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_reviewsFragment_to_listsFragment"
-            app:destination="@id/listsFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
         <action

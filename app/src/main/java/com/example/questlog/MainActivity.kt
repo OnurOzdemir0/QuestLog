@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gamesButton: Button;
     private lateinit var playlistButton: Button;
     private lateinit var reviewsButton: Button;
-    private lateinit var listsButton: Button;
 
-    private lateinit var  reviewButtonInPlaylist : Button;
+
+
     private var currentFragment : FragmentName = FragmentName.Games;
     private  lateinit var  shaderPlaylistViewModel: PlaylistViewModel
     private  lateinit var  sharedReviewViewModel: ReviewViewModel
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         gamesButton = findViewById(R.id.games_page_button);
         playlistButton = findViewById(R.id.playlist_page_button);
         reviewsButton = findViewById(R.id.reviews_page_button);
-        listsButton = findViewById(R.id.lists_page_button);
+
 
 
 
@@ -63,11 +63,7 @@ class MainActivity : AppCompatActivity() {
             navigateToDestination(currentFragment,FragmentName.Reviews);
             currentFragment = FragmentName.Reviews;
         }
-        listsButton.setOnClickListener{
-            GetCurrentFragment()
-            navigateToDestination(currentFragment,FragmentName.Lists);
-            currentFragment = FragmentName.Lists;
-        }
+
 
     }
     /*
@@ -86,8 +82,8 @@ class MainActivity : AppCompatActivity() {
         return when(currentFragment){
             FragmentName.Games -> R.id.gamesFragment
             FragmentName.Reviews -> R.id.reviewsFragment
-            FragmentName.Playlist -> R.id.playlistFragment
-            else -> R.id.listsFragment
+            else -> R.id.playlistFragment
+
         }
 
     }
@@ -96,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             R.id.gamesFragment -> currentFragment = FragmentName.Games
             R.id.reviewsFragment ->currentFragment = FragmentName.Reviews
             R.id.playlistFragment ->currentFragment = FragmentName.Playlist
-            R.id.listsFragment -> currentFragment = FragmentName.Lists
+
         }
 
     }
@@ -104,8 +100,8 @@ class MainActivity : AppCompatActivity() {
         when(from){
             FragmentName.Games-> navigateFromGames(to);
             FragmentName.Playlist->  navigateFromPlaylist(to);
-            FragmentName.Reviews->navigateFromReviews(to);
-            else ->navigateFromLists(to);
+            else ->navigateFromReviews(to);
+
         }
     }
 
@@ -113,32 +109,25 @@ class MainActivity : AppCompatActivity() {
         when(to){
             FragmentName.Games -> println("Already In Games");
             FragmentName.Playlist-> navController.navigate(R.id.action_gamesFragment_to_playlist2);
-            FragmentName.Reviews -> navController.navigate(R.id.action_gamesFragment_to_reviewsFragment2);
-            else->navController.navigate(R.id.action_gamesFragment_to_listsFragment2);
+            else-> navController.navigate(R.id.action_gamesFragment_to_reviewsFragment2);
+
         }
     }
     private fun navigateFromPlaylist(to : FragmentName){
         when(to){
             FragmentName.Playlist-> println("Already in Playlist");
             FragmentName.Games ->  navController.navigate(R.id.action_playlist2_to_gamesFragment);
-            FragmentName.Reviews ->  navController.navigate(R.id.action_playlist2_to_reviewsFragment);
-            else->navController.navigate(R.id.action_playlist2_to_listsFragment);
+            else->  navController.navigate(R.id.action_playlist2_to_reviewsFragment);
+
         }
     }
-    private fun navigateFromLists(to : FragmentName){
-        when(to){
-            FragmentName.Playlist->  navController.navigate(R.id.action_listsFragment_to_playlist2);
-            FragmentName.Games ->  navController.navigate(R.id.action_listsFragment_to_gamesFragment);
-            FragmentName.Reviews ->  navController.navigate(R.id.action_listsFragment_to_reviewsFragment);
-            else-> println("Already in Lists");
-        }
-    }
+
     private fun navigateFromReviews(to : FragmentName){
         when(to){
             FragmentName.Playlist->   navController.navigate(R.id.action_reviewsFragment_to_playlist2);
             FragmentName.Games ->  navController.navigate(R.id.action_reviewsFragment_to_gamesFragment2);
-            FragmentName.Reviews ->  println("Already In Reviews");
-            else->  navController.navigate(R.id.action_reviewsFragment_to_listsFragment);
+            else->  println("Already In Reviews");
+
         }
     }
 
