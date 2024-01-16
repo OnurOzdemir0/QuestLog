@@ -73,7 +73,7 @@ dependencies {
     implementation ("com.squareup.moshi:moshi-kotlin:1.13.0")
     // kapt ("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
 
-
+    implementation ("androidx.compose.material3:material3:1.1.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

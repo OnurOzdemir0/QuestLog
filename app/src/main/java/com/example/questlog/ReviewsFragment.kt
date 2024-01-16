@@ -2,6 +2,8 @@ package com.example.questlog
 
 import ReviewViewModel
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -62,7 +64,7 @@ class ReviewsFragment : Fragment() {
     }
 }
 
-data class Review(val game: Game, val description: String, var isRecommended: Boolean = false)
+data class Review(val game: Game, var description: String, var isRecommended: Boolean = false)
 
 class ReviewAdapter(private val reviews: List<Review>, private val recommendClickListener: (Int, Boolean) -> Unit) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
@@ -109,6 +111,20 @@ class ReviewAdapter(private val reviews: List<Review>, private val recommendClic
             recommendClickListener(position, review.isRecommended)
             notifyDataSetChanged() // Notify adapter to update the UI
         }
+
+        holder.description.removeTextChangedListener(holder.description.tag as? TextWatcher)
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                review.description = s.toString()
+            }
+        }
+
+        holder.description.addTextChangedListener(textWatcher)
+        holder.description.tag = textWatcher
     }
 
     override fun getItemCount(): Int = reviews.size

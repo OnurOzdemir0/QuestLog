@@ -7,12 +7,19 @@
 
     <ImageView
         android:id="@+id/review_game_image"
-        android:layout_width="364dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:padding="8dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/i_3"
         android:contentDescription="TODO" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-60dp"
+        android:background="@drawable/fade_gradient" />
 
     <TextView
         android:id="@+id/review_game_name"
@@ -20,7 +27,6 @@
         android:layout_height="wrap_content"
         android:text="Game Name"
         android:textSize="24sp"
-        android:paddingTop="8dp"
         android:paddingBottom="8dp" />
 
     <TextView
@@ -30,33 +36,21 @@
         android:text="Game Description"
         android:paddingBottom="16dp" />
 
-    <Button
-        android:id="@+id/review_recommend_button"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="8dp"
-        android:text="Do You Recommend It" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:baselineAligned="false"
         android:orientation="horizontal">
-
+        
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/review_general_score_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Score"
+                android:text="General Score"
                 android:textSize="12sp" />
 
             <TextView
@@ -92,12 +86,29 @@
                 android:textSize="12sp" />
 
         </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/review_recommend_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:background="@drawable/baseline_favorite_border_24"
+        android:layout_marginLeft="300dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <!-- Adjustments for displaying Review data -->
             <TextView
@@ -105,15 +116,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User Name"
+
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/review_description"
-                android:layout_width="wrap_content"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Review Description"
-                android:textSize="14sp" />
+                app:startIconDrawable="@drawable/outline_edit_24"
+                app:endIconMode="clear_text"
+
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/review_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:hint="This is a review..."
+
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
