@@ -28,7 +28,7 @@ interface GamesAPIService {
     suspend fun listGames(
         @Query("cover,name,summary,rating") fields: String,
         @Query("10") limit: String  // you can change limit from here
-    ): List<GamesAPI>
+    ): GamesAPI
 
     //Upper method should be sufficient but just in case i will add other requests
 

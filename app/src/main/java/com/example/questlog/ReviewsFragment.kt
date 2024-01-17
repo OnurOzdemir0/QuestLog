@@ -64,11 +64,8 @@ class ReviewsFragment : Fragment() {
     }
 }
 
-<<<<<<< Updated upstream
-data class Review(val game: Game, var description: String, var isRecommended: Boolean = false)
-=======
-data class Review(val game: GameItem, val description: String, var isRecommended: Boolean = false)
->>>>>>> Stashed changes
+
+data class Review(val game: GameItem, var description: String, var isRecommended: Boolean = false)
 
 class ReviewAdapter(private val reviews: List<Review>, private val recommendClickListener: (Int, Boolean) -> Unit) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
@@ -91,7 +88,6 @@ class ReviewAdapter(private val reviews: List<Review>, private val recommendClic
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         val review = reviews[position]
 
-        // Set values from the Review object to corresponding views
         holder.gameName.text = review.game.name
         holder.gameDescription.text = review.game.desc
         holder.generalScore.text = review.game.generalRating.toString()
@@ -99,7 +95,6 @@ class ReviewAdapter(private val reviews: List<Review>, private val recommendClic
        // holder.userName.text = "User: ${review.user.userName}"
         holder.description.text = review.description
 
-        // Load the image dynamically based on the gameID
         val iconName = "i_${review.game.gameID}"
         val resourceId = holder.itemView.context.resources.getIdentifier(iconName, "drawable", holder.itemView.context.packageName)
         if (resourceId != 0) { // Resource exists
@@ -108,12 +103,10 @@ class ReviewAdapter(private val reviews: List<Review>, private val recommendClic
             holder.gameImage.setImageResource(R.drawable.i_1)
         }
 
-        // Set click listener for the recommend button
         holder.recommendButton.setOnClickListener {
-            // Handle recommend button click
             review.isRecommended = !review.isRecommended
             recommendClickListener(position, review.isRecommended)
-            notifyDataSetChanged() // Notify adapter to update the UI
+            notifyDataSetChanged()
         }
 
         holder.description.removeTextChangedListener(holder.description.tag as? TextWatcher)
