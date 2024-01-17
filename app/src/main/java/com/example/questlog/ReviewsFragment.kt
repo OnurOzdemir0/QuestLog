@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.questlog.game.GameItem
 
 
 class ReviewsFragment : Fragment() {
@@ -64,7 +64,11 @@ class ReviewsFragment : Fragment() {
     }
 }
 
+<<<<<<< Updated upstream
 data class Review(val game: Game, var description: String, var isRecommended: Boolean = false)
+=======
+data class Review(val game: GameItem, val description: String, var isRecommended: Boolean = false)
+>>>>>>> Stashed changes
 
 class ReviewAdapter(private val reviews: List<Review>, private val recommendClickListener: (Int, Boolean) -> Unit) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 

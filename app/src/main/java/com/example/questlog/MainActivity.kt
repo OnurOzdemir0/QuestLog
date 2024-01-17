@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.questlog.viewmodel.PlaylistViewModel
+import com.example.questlog.playlist.viewmodel.PlaylistViewModel
 
 enum class FragmentName{
     Games,Playlist,Reviews,Lists
@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
     */
+    //@SuppressLint("SuspiciousIndentation")
     private fun GetCurrentFragment(){
         val id = getIdOfCurrentFragment()
            if( navController.currentDestination?.id != id){

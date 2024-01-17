@@ -6,7 +6,7 @@
     app:startDestination="@id/gamesFragment">
     <fragment
         android:id="@+id/gamesFragment"
-        android:name="com.example.questlog.GamesFragment"
+        android:name="com.example.questlog.game.GamesFragment"
         android:label="fragment_games"
         tools:layout="@layout/fragment_games" >
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/playlistFragment"
-        android:name="com.example.questlog.Playlist"
+        android:name="com.example.questlog.playlist.PlaylistFragment"
         android:label="fragment_playlist"
         tools:layout="@layout/fragment_playlist" >
         <action

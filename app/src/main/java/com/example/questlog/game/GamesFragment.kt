@@ -1,64 +1,100 @@
-package com.example.questlog
+package com.example.questlog.game
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.appcompat.widget.SearchView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.questlog.viewmodel.PlaylistViewModel
+import com.example.questlog.R
+import com.example.questlog.databinding.FragmentGamesBinding
+import com.example.questlog.game.adapter.GameAdapter
+import com.example.questlog.game.adapter.GameCallBacks
+import com.example.questlog.playlist.GameStatus
+import com.example.questlog.playlist.PlayListItem
+import com.example.questlog.playlist.viewmodel.PlaylistViewModel
 
 class GamesFragment : Fragment() {
 
-    private lateinit var searchView: SearchView
-    private lateinit var gamesRecyclerView: RecyclerView
     private lateinit var playListViewModel : PlaylistViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_games, container, false)
-        searchView = view.findViewById(R.id.search_view)
-        gamesRecyclerView = view.findViewById(R.id.games_recycler_view)
+
+        val binding : FragmentGamesBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_games, container,false)
+        binding.lifecycleOwner = this
         playListViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
 
-        return view
+        var adapter : GameAdapter = GameAdapter( GameCallBacks( onAddToPlaylist = {item,status -> OnAddToPlaylist(item,status)},
+            onStatusChecked = {item -> OnStatusChecked(item)}))
+        binding.gamesRecyclerView.adapter  = adapter
+        binding.gamesRecyclerView.layoutManager = LinearLayoutManager(context)
+        val list = getMockGames()
+        adapter.submitList(list)
+        return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        gamesRecyclerView.layoutManager = LinearLayoutManager(context)
-        gamesRecyclerView.adapter = GamesAdapter(getMockGames(),playListViewModel)
+    private  fun OnAddToPlaylist(item :GameItem?, status: GameStatus){
+        if(item== null) return
+        playListViewModel.addNewPlaylistItem(PlayListItem(item,status))
     }
+    private  fun OnStatusChecked(game : GameItem? ) : GameStatus?{
+        if (game == null) return null
+        for (item in playListViewModel.getDataList()) {
+            if (item.game.gameID == game.gameID) {
 
-    private fun getMockGames(): List<Game> {
+                when (item.gameStatus) {
+
+                    GameStatus.Playing -> {
+                        return GameStatus.Playing
+                    }
+
+                    GameStatus.PlanningToPlay -> {
+                        return GameStatus.PlanningToPlay
+                    }
+
+                    GameStatus.Dropped -> {
+                        return GameStatus.Dropped
+                    }
+
+                    GameStatus.Finished -> {
+                        return GameStatus.Finished
+                    }
+
+                }
+
+            }
+        }
+        return  null
+    }
+    private fun getMockGames(): List<GameItem> {
         val context = requireContext()
         val resources = context.resources
 
-        return (1..15).map { gameId ->
-            val gameInfo = resources.getStringArray(resources.getIdentifier("game_$gameId", "array", context.packageName))
-            Game(
-                gameID = gameId,
+        var list : MutableList<GameItem> = mutableListOf()
+        for(i in 1..15) {
+
+            val gameInfo = resources.getStringArray(resources.getIdentifier("game_$i", "array", context.packageName))
+            val item = GameItem(
+                gameID = i,
                 name = gameInfo[0],
                 desc = gameInfo[1],
                 userRating = gameInfo[2].toInt(),
                 generalRating = gameInfo[3].toInt()
             )
+            println(item.gameID)
+            list.add(item)
+
         }
+        return list
     }
 }
-
+/*
 class GamesAdapter(private val gamesList: List<Game>,private val playlistViewModel: PlaylistViewModel) : RecyclerView.Adapter<GamesAdapter.GameViewHolder>() {
-
 
     class GameViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.game_image)
@@ -66,7 +102,7 @@ class GamesAdapter(private val gamesList: List<Game>,private val playlistViewMod
         val addButton : Button = view.findViewById(R.id.game_add_to_playlist)
         private val statusMenu  = PopupMenu(view.context,addButton)
         var first :Boolean = true;
-        public  fun showStatusMenu( game : Game, playlistViewModel: PlaylistViewModel   ) {
+        public  fun showStatusMenu( game : Game, playlistViewModel: PlaylistViewModel) {
             if (first) {
                 statusMenu.inflate(R.menu.status_change_menu)
                 first = false
@@ -84,22 +120,22 @@ class GamesAdapter(private val gamesList: List<Game>,private val playlistViewMod
 
                         R.id.playing -> {
                             addButton.text = "Playing"
-                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.Playing))
+                            playlistViewModel.addNewPlaylistItem(PlayListItem(game,GameStatus.Playing))
                         }
 
                         R.id.planning_to_play -> {
                             addButton.text = "Planning To Play"
-                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.PlanningToPlay))
+                            playlistViewModel.addNewPlaylistItem(PlayListItem(game,GameStatus.PlanningToPlay))
                         }
 
                         R.id.dropped -> {
                             addButton.text = "Dropped"
-                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.Dropped))
+                            playlistViewModel.addNewPlaylistItem(PlayListItem(game,GameStatus.Dropped))
                         }
 
                         R.id.finished -> {
                             addButton.text = "Finished"
-                            playlistViewModel.addNewPlaylistItem(Playlist_Item(game,GameStatus.Finished))
+                            playlistViewModel.addNewPlaylistItem(PlayListItem(game,GameStatus.Finished))
                         }
 
                     }
@@ -157,3 +193,4 @@ class GamesAdapter(private val gamesList: List<Game>,private val playlistViewMod
 
     override fun getItemCount(): Int = gamesList.size
 }
+*/

@@ -1,7 +1,9 @@
-package com.example.questlog
-import android.media.Image
+package com.example.questlog.game
 
-class Game(
+import android.media.Image
+import com.example.questlog.Review
+
+data class GameItem(
     val gameID: Int,
     val name: String,
     val desc: String,
@@ -10,6 +12,3 @@ class Game(
     val coverImage: Image? = null,
     val reviews: List<Review>? = null
 )
-
-
-
