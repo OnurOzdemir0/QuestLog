@@ -3,6 +3,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -73,11 +75,21 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
     // To use Kotlin annotation processing tool (kapt)
 
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
     implementation ("com.squareup.moshi:moshi-kotlin:1.13.0")
     // kapt ("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-firestore")
+
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
     implementation ("androidx.compose.material3:material3:1.1.2")
 

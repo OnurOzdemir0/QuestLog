@@ -1,41 +1,57 @@
 package com.example.questlog.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.example.questlog.R
+import com.example.questlog.database.GameDatabase
 import com.example.questlog.databinding.FragmentGamesBinding
 import com.example.questlog.game.adapter.GameAdapter
 import com.example.questlog.game.adapter.GameCallBacks
 import com.example.questlog.playlist.GameStatus
 import com.example.questlog.playlist.PlayListItem
 import com.example.questlog.playlist.viewmodel.PlaylistViewModel
+import com.example.questlog.viewmodel.GamesListViewModel
 
 class GamesFragment : Fragment() {
 
     private lateinit var playListViewModel : PlaylistViewModel
+    private lateinit var gamesListViewModel : GamesListViewModel
+    private lateinit var binding: FragmentGamesBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding : FragmentGamesBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_games, container,false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_games, container,false
+        )
         binding.lifecycleOwner = this
-        playListViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
 
-        var adapter : GameAdapter = GameAdapter( GameCallBacks( onAddToPlaylist = {item,status -> OnAddToPlaylist(item,status)},
+        playListViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
+        gamesListViewModel = ViewModelProvider(this).get(GamesListViewModel::class.java)
+
+
+        var adapter : GameAdapter = GameAdapter( GameCallBacks(
+            onAddToPlaylist = {item,status -> OnAddToPlaylist(item,status)},
             onStatusChecked = {item -> OnStatusChecked(item)}))
         binding.gamesRecyclerView.adapter  = adapter
         binding.gamesRecyclerView.layoutManager = LinearLayoutManager(context)
-        val list = getMockGames()
-        adapter.submitList(list)
+
+        gamesListViewModel.games.observe(viewLifecycleOwner) { gameList ->
+            adapter.submitList(gameList)
+            Log.d("firestory", gameList.toString())
+        }
         return binding.root
     }
     private  fun OnAddToPlaylist(item :GameItem?, status: GameStatus){
@@ -71,27 +87,31 @@ class GamesFragment : Fragment() {
         }
         return  null
     }
-    private fun getMockGames(): List<GameItem> {
-        val context = requireContext()
-        val resources = context.resources
+//    private fun getMockGames(): List<GameItem> {
+//        val context = requireContext()
+//        val resources = context.resources
+//
+//        var list : MutableList<GameItem> = mutableListOf()
+//        for(i in 1..15) {
+//
+//            val gameInfo = resources.getStringArray(resources.getIdentifier("game_$i", "array", context.packageName))
+//            val item = GameItem(
+//                gameID = i,
+//                name = gameInfo[0],
+//                desc = gameInfo[1],
+//                userRating = gameInfo[2].toInt(),
+//                generalRating = gameInfo[3].toInt()
+//            )
+//            println(item.gameID)
+//            list.add(item)
+//
+//        }
+//        return list
+//    }
 
-        var list : MutableList<GameItem> = mutableListOf()
-        for(i in 1..15) {
+    private val gameDatabase = GameDatabase()
+    val games = MutableLiveData<List<GameItem>>()
 
-            val gameInfo = resources.getStringArray(resources.getIdentifier("game_$i", "array", context.packageName))
-            val item = GameItem(
-                gameID = i,
-                name = gameInfo[0],
-                desc = gameInfo[1],
-                userRating = gameInfo[2].toInt(),
-                generalRating = gameInfo[3].toInt()
-            )
-            println(item.gameID)
-            list.add(item)
-
-        }
-        return list
-    }
 }
 /*
 class GamesAdapter(private val gamesList: List<Game>,private val playlistViewModel: PlaylistViewModel) : RecyclerView.Adapter<GamesAdapter.GameViewHolder>() {

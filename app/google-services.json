@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "629286236458",
+    "project_id": "questlog-e0cbb",
+    "storage_bucket": "questlog-e0cbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629286236458:android:8d919339ad299046622e53",
+        "android_client_info": {
+          "package_name": "com.example.questlog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnvHRdejdsiqw9ZvbV5p3gWnJ5alFKkDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
