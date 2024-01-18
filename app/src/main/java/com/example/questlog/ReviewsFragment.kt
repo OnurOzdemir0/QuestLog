@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.questlog.game.GameItem
 
 
@@ -95,10 +96,13 @@ class ReviewAdapter(private val reviews: List<Review>, private val recommendClic
        // holder.userName.text = "User: ${review.user.userName}"
         holder.description.text = review.description
 
-        val iconName = "i_${review.game.gameID}"
-        val resourceId = holder.itemView.context.resources.getIdentifier(iconName, "drawable", holder.itemView.context.packageName)
-        if (resourceId != 0) { // Resource exists
-            holder.gameImage.setImageResource(resourceId)
+        val screenshotUrl = review.game.screenshotUrl?.firstOrNull()
+        if (!screenshotUrl.isNullOrEmpty()) {
+            Glide.with(holder.itemView.context)
+                .load(screenshotUrl)
+                .placeholder(R.drawable.i_1)
+                .error(R.drawable.i_1)
+                .into(holder.gameImage)
         } else {
             holder.gameImage.setImageResource(R.drawable.i_1)
         }

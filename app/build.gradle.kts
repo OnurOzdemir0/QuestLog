@@ -89,6 +89,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-firestore")
 
+    //glide for images
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
+
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
     implementation ("androidx.compose.material3:material3:1.1.2")

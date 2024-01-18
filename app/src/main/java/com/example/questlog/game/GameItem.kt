@@ -10,5 +10,7 @@ data class GameItem(
     var userRating: Int? = null,
     val generalRating: Int? = null,
     val coverImage: Image? = null,
-    val reviews: List<Review>? = null
+    val reviews: List<Review>? = null,
+    val coverImageUrl: String? = null,
+    val screenshotUrl: List<String>? = null
 )

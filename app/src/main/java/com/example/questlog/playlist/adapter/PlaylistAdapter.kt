@@ -9,7 +9,9 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.questlog.R
+import com.example.questlog.database.GameDatabase
 import com.example.questlog.databinding.ItemPlaylistBinding
 import com.example.questlog.playlist.GameStatus
 import com.example.questlog.playlist.PlayListItem
@@ -39,13 +41,12 @@ class PlaylistAdapter( val callBacks: PlaylistCallBacks) : ListAdapter<PlayListI
             }
             binding.playlistStatusButton.setOnClickListener{  statusMenuWork(callbacks.onStatusChange)}
 
-            // temp image showing
-            val iconName = "i_${item.game.gameID}"
-            val resourceId =  binding.root.context.resources.getIdentifier(  iconName, "drawable",binding.root.context.packageName)
-            if (resourceId != 0) { // Resource exists
-                binding.playlistGameImage.setImageResource(resourceId)
-            } else {
-                binding.playlistGameImage.setImageResource(R.drawable.i_1)
+            if( ! item.game.coverImageUrl.isNullOrEmpty() ){
+                Glide.with(binding.root.context)
+                    .load(item.game.coverImageUrl)
+                    .placeholder(R.drawable.i_1)
+                    .error(R.drawable.i_1)
+                    .into(binding.playlistGameImage)
             }
 
             binding.executePendingBindings()

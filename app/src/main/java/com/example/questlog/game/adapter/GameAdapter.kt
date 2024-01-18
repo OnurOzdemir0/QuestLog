@@ -7,6 +7,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.questlog.R
 import com.example.questlog.databinding.ItemGameBinding
 import com.example.questlog.game.GameItem
@@ -29,13 +30,22 @@ class GameAdapter(val callBacks: GameCallBacks) : ListAdapter<GameItem,GameAdapt
             println(item.name)
 
             // temp image showing
-            val iconName = "i_${item.gameID}"
-            val resourceId =  binding.root.context.resources.getIdentifier(  iconName, "drawable",binding.root.context.packageName)
-            if (resourceId != 0) { // Resource exists
-                binding.gameImage.setImageResource(resourceId)
-            } else {
-                binding.gameImage.setImageResource(R.drawable.i_1)
+//            val iconName = "i_${item.gameID}"
+//            val resourceId =  binding.root.context.resources.getIdentifier(  iconName, "drawable",binding.root.context.packageName)
+//            if (resourceId != 0) { // Resource exists
+//                binding.gameImage.setImageResource(resourceId)
+//            } else {
+//                binding.gameImage.setImageResource(R.drawable.i_1)
+//            }
+
+            if( ! item.coverImageUrl.isNullOrEmpty() ){
+                Glide.with(binding.root.context)
+                    .load(item.coverImageUrl)
+                    .placeholder(R.drawable.i_1)
+                    .error(R.drawable.i_1)
+                    .into(binding.gameImage)
             }
+
 
             var doesExist : Boolean = false
 
