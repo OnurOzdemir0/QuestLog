@@ -1,8 +1,8 @@
-<resources>
+    <resources>
     <string name="app_name">QuestLog</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+        <string name= "dont_have_an_account"><u>Don\'t have an account? <font color ='#0000FF'>SignUp</font></u> </string>
 
     <!-- Game Information Arrays -->
     <!-- Each array represents a game's information, indexed by game IDs -->

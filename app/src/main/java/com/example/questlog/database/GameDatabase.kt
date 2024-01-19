@@ -20,7 +20,7 @@ class GameDatabase {
     suspend fun getGames(): List<GameItem> {
         return try {
             val gameDocuments = db.collection("games")
-                .limit(100)
+                .limit(50)
                 .get()
                 .await()
 
