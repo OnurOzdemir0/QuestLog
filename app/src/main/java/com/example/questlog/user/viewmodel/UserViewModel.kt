@@ -1,53 +1,55 @@
 package com.example.questlog.user.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.questlog.database.UserAuthentication
-import com.google.firebase.auth.FirebaseUser
+import com.example.questlog.authentication.UserAuthentication
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-//TODO experimental dunno how to use firebase yet
 data class  UserData (var userID: String? ,var userName: String?)
+
 class UserViewModel : ViewModel() {
-    val userAuthentication = UserAuthentication()
+    private val userAuthentication = UserAuthentication()
 
-    private val currentUser_  = MutableLiveData<UserData>()
-    val currentUser  : LiveData<UserData> get()  = currentUser_
-    fun tryToLogInUser( mail: String,password: String){
-        userAuthentication.logIn(mail,password, onFinish = { p ->onLogin(p)})
-    }
-    fun tryToSignUpUser(mail: String,password: String){
-        userAuthentication.signUp(mail,password, onFinish = {})
-    }
+    private val _currentUser = MutableLiveData<UserData?>()
+    val currentUser: MutableLiveData<UserData?> = _currentUser
 
-    fun getCurrentUserFinishedGameCount() : Int {
-        // TODO
-        return 0
-    }
-    fun getCurrentUserPlayingGameCount() : Int {
-        // TODO
-        return 0
-    }
-    fun getCurrentUserReviewedGameCount() : Int {
-        // TODO
-        return 0
-    }
-
-    private fun onLogin( predicate: Boolean){
-        if(predicate){
-           val user =  userAuthentication.getCurrentUser()
-            currentUser_.value?.userID = user?.uid
-            currentUser_.value?.userName = user?.displayName
-
-        }else{
-            //TODO handle else
+    fun tryToLogInUser(username: String, password: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val loginSuccess = userAuthentication.login(username, password)
+            if (loginSuccess) {
+                _currentUser.postValue(UserData(null, username))
+                Log.d("UserViewModel", "Login success")
+            } else {
+                _currentUser.postValue(null)
+                Log.d("UserViewModel", "Login failed")
+            }
         }
     }
-    private fun onSignUp(predicate :Boolean){
-        if(predicate){
-            //TODO
-        }else{
-            //TODO
+
+    fun tryToSignUpUser(username: String, password: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val signUpSuccess = userAuthentication.signUp(username, password)
+            if (signUpSuccess) {
+                _currentUser.postValue(UserData(null, username))
+            } else {
+                _currentUser.postValue(null)
+            }
         }
+    }
+
+    fun getCurrentUserFinishedGameCount(): Int {
+        return 0
+    }
+
+    fun getCurrentUserReviewedGameCount(): Int {
+        return 0
+    }
+
+    fun getCurrentUserPlayingGameCount(): Int {
+        return 0
     }
 }

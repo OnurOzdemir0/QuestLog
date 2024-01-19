@@ -1,42 +1,47 @@
-package com.example.questlog.database
+package com.example.questlog.authentication
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
 class UserAuthentication {
-    val auth = FirebaseAuth.getInstance()
-    fun signUp(email : String , password: String , onFinish: (Boolean) -> Unit){
-        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
-            task -> if(task.isSuccessful) {
-                println("Sign up succesful")
-                onFinish(true)
-        }
-        else{
-            println(task.exception?.message?: "Sign up Failed")
-            onFinish(false)
-        }
+    private val db = FirebaseFirestore.getInstance()
 
+    suspend fun login(username: String, password: String): Boolean {
+        return try {
+            val userDocument = db.collection("users")
+                .whereEqualTo("username", username)
+                .get()
+                .await()
+                .documents
+                .firstOrNull()
+
+            userDocument?.getString("password") == password
+        } catch (e: Exception) {
+            false
         }
     }
 
-    fun logIn( email: String, password: String,onFinish: (Boolean) -> Unit ){
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    onFinish(true)
-                } else {
-                    println(task.exception?.message ?: "Login failed.")
-                    onFinish(false)
-                }
+    suspend fun signUp(username: String, password: String): Boolean {
+        return try {
+            val existingUser = db.collection("users")
+                .whereEqualTo("username", username)
+                .get()
+                .await()
+                .documents
+                .isNotEmpty()
+
+            if (!existingUser) {
+                val newUser = hashMapOf(
+                    "username" to username,
+                    "password" to password
+                )
+                db.collection("users").add(newUser).await()
+                true
+            } else {
+                false
             }
-    }
-
-    fun logOut(){
-        auth.signOut()
-    }
-
-    fun getCurrentUser():FirebaseUser?{
-        return auth.currentUser
+        } catch (e: Exception) {
+            false
+        }
     }
 }
