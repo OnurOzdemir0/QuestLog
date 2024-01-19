@@ -1,5 +1,6 @@
 package com.example.questlog
 
+import android.annotation.SuppressLint
 import com.example.questlog.review.viewmodel.ReviewViewModel
 import android.os.Bundle
 import android.widget.Button
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
     */
     //@SuppressLint("SuspiciousIndentation")
+
     private fun GetCurrentFragment(){
         val id = getIdOfCurrentFragment()
            if( navController.currentDestination?.id != id){

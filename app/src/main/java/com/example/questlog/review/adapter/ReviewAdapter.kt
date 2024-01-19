@@ -46,6 +46,7 @@ class ReviewAdapter ( val callBacks: ReviewCallBacks): ListAdapter<ReviewItem,Re
                 println(binding.reviewDescription.toString())
                 callBacks.onReviewDescChange(binding.review, binding.reviewDescription.text.toString())
                 binding.reviewUserReviewDisplay.text = binding.reviewDescription.text.toString()
+                binding.reviewDescription.clearComposingText()
             }
             /*
             olmadı bu :<

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import com.example.questlog.MarginDecorator
 import com.example.questlog.R
 import com.example.questlog.database.GameDatabase
 import com.example.questlog.databinding.FragmentGamesBinding
@@ -46,8 +48,10 @@ class GamesFragment : Fragment() {
             onAddToPlaylist = {item,status -> OnAddToPlaylist(item,status)},
             onStatusChecked = {item -> OnStatusChecked(item)}))
         binding.gamesRecyclerView.adapter  = adapter
+
         binding.gamesRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        binding.gamesRecyclerView.addItemDecoration(MarginDecorator(10,5,2,2))
         gamesListViewModel.games.observe(viewLifecycleOwner) { gameList ->
             adapter.submitList(gameList)
             Log.d("firestory", gameList.toString())

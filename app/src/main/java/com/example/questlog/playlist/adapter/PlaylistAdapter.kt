@@ -34,6 +34,7 @@ class PlaylistAdapter( val callBacks: PlaylistCallBacks) : ListAdapter<PlayListI
         fun bind(item : PlayListItem, callbacks : PlaylistCallBacks){
             binding.item = item;
             binding.playlistAddReview.setOnClickListener{
+                println("clicked on add review")
                 callbacks.onReviewClick(binding.item)
             }
             binding.playlistUserScore.setOnClickListener{

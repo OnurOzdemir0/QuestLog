@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questlog.playlist.viewmodel.PlaylistViewModel
 
 import androidx.navigation.fragment.findNavController
+import com.example.questlog.MarginDecorator
 
 import com.example.questlog.R
 import com.example.questlog.review.ReviewItem
@@ -51,6 +52,7 @@ class PlaylistFragment : Fragment() {
         )
         binding.playlistRecyclerview.adapter = adapter
         binding.playlistRecyclerview.layoutManager = LinearLayoutManager(context)
+        binding.playlistRecyclerview.addItemDecoration(MarginDecorator(10,5,2,2))
         reviewViewModel = ViewModelProvider(requireActivity()).get(ReviewViewModel::class.java)
         // Inflate the layout for this fragment
 
@@ -62,16 +64,16 @@ class PlaylistFragment : Fragment() {
         playlistViewModel.changePlayListItemStatus(item, status)
     }
 
-    private fun OnReviewClick(item: PlayListItem?) {
-        if (item == null) return
+    private fun OnReviewClick(item_: PlayListItem?) {
+        if (item_ == null) return
         val navController = findNavController()
         var doesExist = false
         for (item in reviewViewModel.getReviewList()) {
-            if (item.game.gameID == item.game.gameID)
+            if (item_.game.gameID == item.game.gameID)
                 doesExist = true
         }
         if (!doesExist) {
-            reviewViewModel.addNewReview(ReviewItem(item.game, "", false))
+            reviewViewModel.addNewReview(ReviewItem(item_.game, "", false))
             navController.navigate(R.id.action_playlist2_to_reviewsFragment)
         }
     }
