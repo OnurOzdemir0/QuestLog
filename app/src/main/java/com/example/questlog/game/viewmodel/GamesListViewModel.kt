@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.questlog.database.GameDatabase
 import com.example.questlog.game.GameItem
-import kotlinx.coroutines.flow.internal.NopCollector.emit
+
 
 
 class GamesListViewModel: ViewModel() {

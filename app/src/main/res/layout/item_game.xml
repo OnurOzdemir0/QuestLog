@@ -42,15 +42,15 @@
 
             <TextView
                 android:id="@+id/game_name"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@{game.name}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintStart_toEndOf="@id/game_image"
-                app:layout_constraintTop_toTopOf="@id/game_image"
                 app:layout_constraintBottom_toBottomOf="@id/game_image"
-                app:layout_constraintEnd_toStartOf="@id/game_add_to_playlist" />
+                app:layout_constraintEnd_toStartOf="@id/game_add_to_playlist"
+                app:layout_constraintStart_toEndOf="@id/game_image"
+                app:layout_constraintTop_toTopOf="@id/game_image" />
 
             <Button
                 android:id="@+id/game_add_to_playlist"
