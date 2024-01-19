@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/reviewsFragment"
-        android:name="com.example.questlog.ReviewsFragment"
+        android:name="com.example.questlog.review.ReviewsFragment"
         android:label="fragment_reviews"
         tools:layout="@layout/fragment_reviews" >
         <action

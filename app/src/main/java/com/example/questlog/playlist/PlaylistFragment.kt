@@ -1,6 +1,6 @@
 package com.example.questlog.playlist
 
-import ReviewViewModel
+import com.example.questlog.review.viewmodel.ReviewViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,11 +15,10 @@ import com.example.questlog.playlist.viewmodel.PlaylistViewModel
 import androidx.navigation.fragment.findNavController
 
 import com.example.questlog.R
-import com.example.questlog.Review
+import com.example.questlog.review.ReviewItem
 import com.example.questlog.databinding.FragmentPlaylistBinding
 import com.example.questlog.playlist.adapter.PlaylistAdapter
 import com.example.questlog.playlist.adapter.PlaylistCallBacks
-import com.example.questlog.playlist.GameStatus
 
 
 class PlaylistFragment : Fragment() {
@@ -72,7 +71,7 @@ class PlaylistFragment : Fragment() {
                 doesExist = true
         }
         if (!doesExist) {
-            reviewViewModel.addNewReview(Review(item.game, "", false))
+            reviewViewModel.addNewReview(ReviewItem(item.game, "", false))
             navController.navigate(R.id.action_playlist2_to_reviewsFragment)
         }
     }

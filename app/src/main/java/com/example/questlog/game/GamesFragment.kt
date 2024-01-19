@@ -18,7 +18,7 @@ import com.example.questlog.game.adapter.GameCallBacks
 import com.example.questlog.playlist.GameStatus
 import com.example.questlog.playlist.PlayListItem
 import com.example.questlog.playlist.viewmodel.PlaylistViewModel
-import com.example.questlog.viewmodel.GamesListViewModel
+import com.example.questlog.game.viewmodel.GamesListViewModel
 
 class GamesFragment : Fragment() {
 

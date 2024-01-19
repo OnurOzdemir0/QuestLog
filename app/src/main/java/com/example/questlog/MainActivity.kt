@@ -1,6 +1,6 @@
 package com.example.questlog
 
-import ReviewViewModel
+import com.example.questlog.review.viewmodel.ReviewViewModel
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity

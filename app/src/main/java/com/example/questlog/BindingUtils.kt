@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.questlog.playlist.GameStatus
 import com.example.questlog.playlist.PlayListItem
+import com.example.questlog.review.ReviewItem
 
 @BindingAdapter("gameStatusSTR")
     fun Button.convertGameStatusToSTR(status: GameStatus?){
@@ -21,4 +22,15 @@ import com.example.questlog.playlist.PlayListItem
                 else -> text = "status"
             }
         }
+    }
+
+@BindingAdapter("emptyReviewHandler")
+    fun TextView.handleEmptyString(item : ReviewItem){
+            item.let {
+                if(item.description.isEmpty()){
+                    text = "Review the game!"
+                }else{
+                    text = item.description
+                }
+            }
     }

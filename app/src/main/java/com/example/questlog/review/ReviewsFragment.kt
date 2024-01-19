@@ -1,74 +1,73 @@
-package com.example.questlog
+package com.example.questlog.review
 
-import ReviewViewModel
+import com.example.questlog.review.viewmodel.ReviewViewModel
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.questlog.game.GameItem
+import com.example.questlog.R
+import com.example.questlog.databinding.FragmentReviewsBinding
+import com.example.questlog.review.adapter.ReviewAdapter
+import com.example.questlog.review.adapter.ReviewCallBacks
 
 
 class ReviewsFragment : Fragment() {
-    private lateinit var searchView: SearchView
-    private lateinit var recyclerView: RecyclerView
+
 
     private lateinit var reviewViewModel: ReviewViewModel
-
+    private lateinit var binding: FragmentReviewsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_reviews, container, false)
 
-        recyclerView = view.findViewById(R.id.review_recyclerview)
-        searchView = view.findViewById(R.id.review_search)
+        binding  = DataBindingUtil.inflate(
+            inflater,R.layout.fragment_reviews,
+            container, false
+        )
+        val callback  = ReviewCallBacks(
+            recommendClickListener = { item ->OnRecommendClick(item) },
+            reviewDescChanged =  {item,content -> OnReviewDescChange(item,content)}
+        )
+        var adapter : ReviewAdapter = ReviewAdapter(callback)
+        binding.reviewRecyclerview.adapter = adapter
+        binding.reviewRecyclerview.layoutManager = LinearLayoutManager(context)
+
         reviewViewModel = ViewModelProvider(requireActivity()).get(ReviewViewModel::class.java)
         // Inflate the layout for this fragment
-        return view
 
+        adapter.submitList(reviewViewModel.getReviewList())
+        return binding.root
+
+    }
+
+    fun OnRecommendClick( item:ReviewItem?){
+
+         reviewViewModel.changeRecommendState(item)
+
+    }
+    fun OnReviewDescChange(item : ReviewItem?, content : String){
+        reviewViewModel.changeDesc(item,content)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
-
-
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-
-        reviewViewModel.reviews.observe(viewLifecycleOwner) { newList ->
-            recyclerView.adapter = ReviewAdapter(newList) { position, isRecommended ->
-                // Handle recommendation click
-                val review = reviewViewModel.reviews.value?.get(position)
-                review?.isRecommended = isRecommended
-                // Perform any additional actions based on the recommendation status
-            }
-        }
     }
 
-    private fun getReview(): List<Review> {
+    private fun getReview(): List<ReviewItem> {
         return reviewViewModel.getReviewList()
     }
 }
 
 
-data class Review(val game: GameItem, var description: String, var isRecommended: Boolean = false)
 
-class ReviewAdapter(private val reviews: List<Review>, private val recommendClickListener: (Int, Boolean) -> Unit) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
+/*
+class ReviewAdapter(private val reviews: List<ReviewItem>, private val recommendClickListener: (Int, Boolean) -> Unit) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
     class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val gameImage: ImageView = view.findViewById(R.id.review_game_image)
@@ -130,3 +129,4 @@ class ReviewAdapter(private val reviews: List<Review>, private val recommendClic
 
     override fun getItemCount(): Int = reviews.size
 }
+*/
