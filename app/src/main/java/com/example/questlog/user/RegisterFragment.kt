@@ -31,7 +31,7 @@ class RegisterFragment : Fragment() {
             Log.d("RegisterFragment", "Register button clicked")
             navController.navigate(R.id.action_registerFragment_to_logInFragment)
         }
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        return binding.root
     }
 
 }
