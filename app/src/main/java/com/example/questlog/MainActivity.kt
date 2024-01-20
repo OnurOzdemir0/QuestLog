@@ -8,7 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+<<<<<<< Updated upstream
+=======
+import com.example.questlog.databinding.ActivityMainBinding
+import com.example.questlog.game.viewmodel.GamesListViewModel
+>>>>>>> Stashed changes
 import com.example.questlog.playlist.viewmodel.PlaylistViewModel
+import com.example.questlog.user.viewmodel.UserViewModel
 
 enum class FragmentName{
     Games,Playlist,Reviews,Lists
@@ -26,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private var currentFragment : FragmentName = FragmentName.Games;
     private  lateinit var  shaderPlaylistViewModel: PlaylistViewModel
     private  lateinit var  sharedReviewViewModel: ReviewViewModel
+    private  lateinit var sharedUserViewModel: UserViewModel
+    private  lateinit var sharedGamesViewModel: GamesListViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -49,8 +57,15 @@ class MainActivity : AppCompatActivity() {
 
         shaderPlaylistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
         sharedReviewViewModel = ViewModelProvider(this).get(ReviewViewModel::class.java)
+<<<<<<< Updated upstream
         gamesButton.setOnClickListener{
             GetCurrentFragment()
+=======
+        sharedUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        sharedGamesViewModel = ViewModelProvider(this).get(GamesListViewModel::class.java)
+        binding.gamesPageButton.setOnClickListener{
+            updateCurrentFragment()
+>>>>>>> Stashed changes
             navigateToDestination(currentFragment,FragmentName.Games);
             currentFragment = FragmentName.Games;
         }

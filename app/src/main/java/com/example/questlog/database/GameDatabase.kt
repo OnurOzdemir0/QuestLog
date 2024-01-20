@@ -24,10 +24,11 @@ class GameDatabase {
                 .get()
                 .await()
 
-            Log.d("firestore", "document ---- ${gameDocuments.documents}")
+          //  Log.d("firestore", "document ---- ${gameDocuments.documents}")
 
             gameDocuments.documents.mapNotNull { document ->
-                val gameID = document.getLong("id")?.toInt() // Cast to Long then to Int
+
+                val gameID = document.getLong("id")?.toInt()// Cast to Long then to Int
                 val name = document.getString("name") ?: ""
                 val desc = document.getString("summary") ?: ""
                 val rating = floor(document.getDouble("rating") ?: 0.0).toInt()
@@ -56,9 +57,9 @@ class GameDatabase {
                     "https://images.igdb.com/igdb/image/upload/t_1080p/$it.jpg"
                 }
 
-                Log.d("firestore", "getGames ---------------- $gameID, $name, $desc")
+                //Log.d("firestore", "getGames ---------------- $gameID, $name, $desc")
                 GameItem(
-                    gameID = gameID!!,
+                    gameID = gameID.toString(),
                     name = name,
                     desc = desc,
                     generalRating = rating,

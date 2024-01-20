@@ -21,6 +21,7 @@ import com.example.questlog.playlist.GameStatus
 import com.example.questlog.playlist.PlayListItem
 import com.example.questlog.playlist.viewmodel.PlaylistViewModel
 import com.example.questlog.game.viewmodel.GamesListViewModel
+import kotlinx.coroutines.runBlocking
 
 class GamesFragment : Fragment() {
 
@@ -41,7 +42,7 @@ class GamesFragment : Fragment() {
         binding.lifecycleOwner = this
 
         playListViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
-        gamesListViewModel = ViewModelProvider(this).get(GamesListViewModel::class.java)
+        gamesListViewModel = ViewModelProvider(requireActivity()).get(GamesListViewModel::class.java)
 
 
         var adapter : GameAdapter = GameAdapter( GameCallBacks(
@@ -60,33 +61,40 @@ class GamesFragment : Fragment() {
     }
     private  fun OnAddToPlaylist(item :GameItem?, status: GameStatus){
         if(item== null) return
-        playListViewModel.addNewPlaylistItem(PlayListItem(item,status))
+        runBlocking {
+            playListViewModel.addNewPlaylistItem(PlayListItem(item,status))
+        }
+
     }
     private  fun OnStatusChecked(game : GameItem? ) : GameStatus?{
         if (game == null) return null
-        for (item in playListViewModel.getDataList()) {
-            if (item.game.gameID == game.gameID) {
 
-                when (item.gameStatus) {
+        val list  =playListViewModel.getDataList()
+        if(list !=null) {
+            for (item in list) {
+                if (item.game.gameID == game.gameID) {
 
-                    GameStatus.Playing -> {
-                        return GameStatus.Playing
-                    }
+                    when (item.gameStatus) {
 
-                    GameStatus.PlanningToPlay -> {
-                        return GameStatus.PlanningToPlay
-                    }
+                        GameStatus.Playing -> {
+                            return GameStatus.Playing
+                        }
 
-                    GameStatus.Dropped -> {
-                        return GameStatus.Dropped
-                    }
+                        GameStatus.PlanningToPlay -> {
+                            return GameStatus.PlanningToPlay
+                        }
 
-                    GameStatus.Finished -> {
-                        return GameStatus.Finished
+                        GameStatus.Dropped -> {
+                            return GameStatus.Dropped
+                        }
+
+                        GameStatus.Finished -> {
+                            return GameStatus.Finished
+                        }
+
                     }
 
                 }
-
             }
         }
         return  null

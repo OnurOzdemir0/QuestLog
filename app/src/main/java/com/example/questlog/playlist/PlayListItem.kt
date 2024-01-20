@@ -12,5 +12,6 @@ public enum class GameStatus{
 data class PlayListItem(
 
     val game : GameItem,
-    var gameStatus: GameStatus
+    var gameStatus: GameStatus,
+    var userScore : Int = 0
 )

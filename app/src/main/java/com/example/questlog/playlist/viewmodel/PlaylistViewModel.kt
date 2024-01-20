@@ -3,49 +3,53 @@ package com.example.questlog.playlist.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
+import com.example.questlog.authentication.UserAuthentication
+import com.example.questlog.database.GameDatabase
+import com.example.questlog.database.PlaylistDatabase
 
 import com.example.questlog.playlist.GameStatus
 import com.example.questlog.playlist.PlayListItem
+import kotlinx.coroutines.runBlocking
 
-class PlaylistViewModel : ViewModel() {
+class PlaylistViewModel() : ViewModel() {
 
-    private val _listings = MutableLiveData <MutableList<PlayListItem> >()
+    private val playlistDatabase_ = PlaylistDatabase()
+    var userID: String = "kkk"
 
-    val listings : LiveData <MutableList<PlayListItem>> get() = _listings
 
-    init{
-        _listings.value = mutableListOf()
+   suspend fun addNewPlaylistItem( item : PlayListItem){
+
+
+       if( playlistDatabase_.addPlaylistItem(userID,item.game.gameID,item.gameStatus.toString(),item.userScore))
+           println("new item Added")
+
     }
-    fun addNewPlaylistItem( item : PlayListItem){
-        val currentList = _listings.value ?: mutableListOf()
-        currentList.add(item)
-        println("added item to playlist")
-        _listings.value = currentList
-    }
-    fun getDataList() : List<PlayListItem>{
-        println("playlist items getted " + listings.value?.size)
-        return listings.value ?: mutableListOf()
-    }
-
-    fun changePlayListItemStatus(item : PlayListItem?,status : GameStatus){
-        val currentList = _listings.value ?: mutableListOf()
-        if(currentList.contains(item)){
-            val index = currentList.indexOf(item)
-            currentList[index].gameStatus  = status
-            println("playlist item status changed")
-        }
-        _listings.value = currentList
-    }
-    fun changePlayListItemUserScore(item : PlayListItem?,score : Int){
-        val currentList = _listings.value ?: mutableListOf()
-        if(currentList.contains(item)){
-            val index= currentList.indexOf(item)
-            currentList[index].game.userRating =  score
-            println("playlist item user score changed")
+    fun getDataList() : List<PlayListItem>?{
+        val list :List<PlayListItem>?
+        runBlocking {
+            list  = playlistDatabase_.getPlaylistItems(userID)
         }
 
+        if(list!=null){
+            return list
+        }else{
+            return emptyList()
+        }
 
-        _listings.value = currentList
+    }
+
+    suspend fun changePlayListItemStatus(item : PlayListItem?,status : GameStatus){
+        if(item !=null){
+            if( playlistDatabase_.addPlaylistItem(userID,item.game.gameID,status.toString(),item.userScore))
+                println("new item Added")
+        }
+    }
+    suspend fun changePlayListItemUserScore(item : PlayListItem?,score : Int){
+        if(item !=null){
+            if( playlistDatabase_.addPlaylistItem(userID,item.game.gameID,item.gameStatus.toString(),score))
+                println("new item Added")
+        }
     }
 
 

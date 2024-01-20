@@ -27,7 +27,7 @@ class ReviewAdapter ( val callBacks: ReviewCallBacks): ListAdapter<ReviewItem,Re
         fun bind( item : ReviewItem, callBacks: ReviewCallBacks){
             binding.review  = item
 
-            val screenshotUrl = item.game.screenshotUrl?.firstOrNull()
+            val screenshotUrl = item.listing.game.screenshotUrl?.firstOrNull()
             if (!screenshotUrl.isNullOrEmpty()) {
                 Glide.with(binding.root.context)
                     .load(screenshotUrl)
@@ -82,7 +82,7 @@ class ReviewAdapter ( val callBacks: ReviewCallBacks): ListAdapter<ReviewItem,Re
     companion object  DiffCallBack : DiffUtil.ItemCallback<ReviewItem>(){
 
         override fun areContentsTheSame(oldItem: ReviewItem, newItem: ReviewItem): Boolean {
-            return oldItem.game.gameID == newItem.game.gameID
+            return oldItem.listing.game.gameID == newItem.listing.game.gameID
         }
 
         override fun areItemsTheSame(oldItem: ReviewItem, newItem: ReviewItem): Boolean {

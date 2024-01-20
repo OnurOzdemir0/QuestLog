@@ -4,7 +4,7 @@ import android.media.Image
 import com.example.questlog.review.ReviewItem
 
 data class GameItem(
-    val gameID: Int,
+    val gameID: String,
     val name: String,
     val desc: String,
     var userRating: Int? = null,

@@ -22,6 +22,7 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation" />
 
+<<<<<<< Updated upstream
     <LinearLayout
         android:id="@+id/linerLayout"
         android:layout_width="match_parent"
@@ -29,11 +30,29 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="34dp"
         android:orientation="vertical">
+=======
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linerLayout"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation" />
+>>>>>>> Stashed changes
 
         <TextView
             android:id="@+id/app_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< Updated upstream
             android:text="QuestLog"
             android:textAlignment="center"
             android:textSize="28sp"
@@ -47,6 +66,17 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal">
+=======
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="162dp"
+                app:srcCompat="@drawable/logo" />
+>>>>>>> Stashed changes
 
             <Button
                 android:id="@+id/games_page_button"

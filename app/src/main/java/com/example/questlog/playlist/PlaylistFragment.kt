@@ -20,13 +20,15 @@ import com.example.questlog.review.ReviewItem
 import com.example.questlog.databinding.FragmentPlaylistBinding
 import com.example.questlog.playlist.adapter.PlaylistAdapter
 import com.example.questlog.playlist.adapter.PlaylistCallBacks
+import com.example.questlog.user.viewmodel.UserViewModel
+import kotlinx.coroutines.runBlocking
 
 
 class PlaylistFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var playlistViewModel: PlaylistViewModel
     private lateinit var reviewViewModel: ReviewViewModel
-
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +43,7 @@ class PlaylistFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        playlistViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
+
 
         var adapter: PlaylistAdapter = PlaylistAdapter(
             PlaylistCallBacks(
@@ -53,7 +55,19 @@ class PlaylistFragment : Fragment() {
         binding.playlistRecyclerview.adapter = adapter
         binding.playlistRecyclerview.layoutManager = LinearLayoutManager(context)
         binding.playlistRecyclerview.addItemDecoration(MarginDecorator(10,5,2,2))
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         reviewViewModel = ViewModelProvider(requireActivity()).get(ReviewViewModel::class.java)
+        playlistViewModel = ViewModelProvider(requireActivity()).get(PlaylistViewModel::class.java)
+        if(userViewModel.currentUser.value !=null){
+            val s = userViewModel.currentUser.value
+            val k = s?.userID
+            if(k!=null){
+                playlistViewModel.userID = k
+            }
+        }
+
+
+
         // Inflate the layout for this fragment
 
         adapter.submitList(playlistViewModel.getDataList())
@@ -61,24 +75,23 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun OnStatusChange(item: PlayListItem?, status: GameStatus) {
-        playlistViewModel.changePlayListItemStatus(item, status)
+        runBlocking{
+            playlistViewModel.changePlayListItemStatus(item, status)
+
+        }
     }
 
     private fun OnReviewClick(item_: PlayListItem?) {
         if (item_ == null) return
         val navController = findNavController()
-        var doesExist = false
-        for (item in reviewViewModel.getReviewList()) {
-            if (item_.game.gameID == item.game.gameID)
-                doesExist = true
-        }
-        if (!doesExist) {
-            reviewViewModel.addNewReview(ReviewItem(item_.game, "", false))
-            navController.navigate(R.id.action_playlist2_to_reviewsFragment)
-        }
+
+        reviewViewModel.addNewReviewSafe(ReviewItem(item_, "", false))
+        navController.navigate(R.id.action_playlist2_to_reviewsFragment)
+
     }
 
     private fun OnScoreChange(item: PlayListItem?, score: Int) {
-        playlistViewModel.changePlayListItemUserScore(item, score)
+        runBlocking {  playlistViewModel.changePlayListItemUserScore(item, score) }
+
     }
 }

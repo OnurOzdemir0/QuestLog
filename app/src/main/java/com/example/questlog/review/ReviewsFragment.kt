@@ -13,12 +13,14 @@ import com.example.questlog.R
 import com.example.questlog.databinding.FragmentReviewsBinding
 import com.example.questlog.review.adapter.ReviewAdapter
 import com.example.questlog.review.adapter.ReviewCallBacks
+import com.example.questlog.user.viewmodel.UserViewModel
 
 
 class ReviewsFragment : Fragment() {
 
 
     private lateinit var reviewViewModel: ReviewViewModel
+    private lateinit var userViewModel:UserViewModel
     private lateinit var binding: FragmentReviewsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +38,10 @@ class ReviewsFragment : Fragment() {
         var adapter : ReviewAdapter = ReviewAdapter(callback)
         binding.reviewRecyclerview.adapter = adapter
         binding.reviewRecyclerview.layoutManager = LinearLayoutManager(context)
-
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         reviewViewModel = ViewModelProvider(requireActivity()).get(ReviewViewModel::class.java)
+        reviewViewModel.userID = userViewModel.currentUser.value?.userID
+        println(reviewViewModel.userID )
         // Inflate the layout for this fragment
 
         adapter.submitList(reviewViewModel.getReviewList())

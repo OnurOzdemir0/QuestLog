@@ -34,7 +34,7 @@
         android:id="@+id/review_game_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{review.game.name}"
+        android:text="@{review.listing.game.name}"
         android:textSize="24sp"
         android:paddingBottom="8dp" />
 
@@ -42,7 +42,7 @@
         android:id="@+id/review_game_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{review.game.desc}"
+        android:text="@{review.listing.game.desc}"
         android:paddingBottom="16dp" />
 
     <LinearLayout
@@ -67,7 +67,7 @@
                 android:id="@+id/review_general_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{Integer.toString(review.game.generalRating)}"
+                android:text="@{Integer.toString(review.listing.game.generalRating)}"
                 android:textAlignment="center"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -92,7 +92,7 @@
                 android:id="@+id/review_user_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{Integer.toString(review.game.userRating)}"
+                android:text="@{Integer.toString(review.listing.userScore)}"
                 android:textAlignment="center"
                 android:textSize="12sp" />
 
