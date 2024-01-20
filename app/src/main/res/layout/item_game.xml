@@ -54,14 +54,14 @@
 
             <Button
                 android:id="@+id/game_add_to_playlist"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
+                android:background="@drawable/roundstyle"
                 android:textSize="12sp"
                 app:gameStatusSTR="@{gameCallbacks.OnStatusCheck(game)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="269dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -99,6 +99,7 @@
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="15dp"
             android:text="RegIster" />
+
         <Button
             android:id="@+id/backToLogInButton"
             android:layout_width="match_parent"
