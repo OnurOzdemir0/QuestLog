@@ -52,29 +52,6 @@
             android:paddingLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_weight="1"
-            android:text="E-mail"
-
-            android:textAlignment="viewStart"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/registerMail"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@android:drawable/dialog_holo_light_frame"
-            android:ems="10"
-            android:paddingLeft="15dp"
-            android:hint="E-Mail"
-            android:inputType="textEmailAddress" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_weight="1"
             android:text="Password"
             android:textAlignment="viewStart"
             android:textSize="20sp"
@@ -88,7 +65,7 @@
             android:background="@android:drawable/dialog_holo_light_frame"
             android:ems="10"
             android:paddingLeft="15dp"
-            android:hint="password"
+            android:hint="Password"
             android:inputType="text"
             android:textSize="20sp" />
 
