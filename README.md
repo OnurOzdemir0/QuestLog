@@ -35,4 +35,6 @@ Glide is used to retrieve the image from the Url.
 Since we decided to go through 2nd option(using firebase firestore), we didn't implemented the full authentication. However we still have a valid register and login which again validated through the firestore database.
 There is a collection named "users", and its documents are used to check if such user exists. And the register uploads a new document with the given username and password.
 
+## Design
+In order to follow Material Design 3 Standards the Carousel (https://m3.material.io/components/carousel/overview) is implemented in Reviews section. Screenshots are items that can be seen as sliding horizontally. After the slide, it snaps the next element in the center.
 
