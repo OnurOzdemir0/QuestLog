@@ -41,15 +41,29 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun getCurrentUserFinishedGameCount(): Int {
-        return 0
-    }
+    fun changePassword(oldPassword: String, newPassword:String, onComplete:(Boolean) ->Unit){
+        CoroutineScope(Dispatchers.IO).launch {
+            if(currentUser.value != null){
+                println( "user not null")
+               val userName =  currentUser.value!!.userName
+                if (userName != null) {
+                    println( "id not null")
+                    if(userAuthentication.changePassword(userName,oldPassword,newPassword)){
+                        println( "password changed")
+                        onComplete(true)
+                    }else{
+                        println("password couln't change")
+                        onComplete(false)
+                    }
+                }else{
+                    println( "id  null")
+                    onComplete(false)
+                }
+            }else{println( "user null")
+                onComplete(false)
+            }
 
-    fun getCurrentUserReviewedGameCount(): Int {
-        return 0
-    }
 
-    fun getCurrentUserPlayingGameCount(): Int {
-        return 0
+        }
     }
 }

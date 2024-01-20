@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.questlog.databinding.ActivityMainBinding
 import com.example.questlog.playlist.viewmodel.PlaylistViewModel
+import com.example.questlog.user.viewmodel.UserViewModel
+import com.google.firebase.firestore.auth.User
 
 enum class FragmentName{
     Games,Playlist,Reviews,Profile
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private var currentFragment : FragmentName = FragmentName.Games;
     private  lateinit var  sharedPlaylistViewModel: PlaylistViewModel
     private  lateinit var  sharedReviewViewModel: ReviewViewModel
+    private  lateinit var  userViewModel : UserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -63,6 +66,32 @@ class MainActivity : AppCompatActivity() {
                     binding.playlistPageButton.visibility = View.VISIBLE
                     binding.reviewsPageButton.visibility = View.VISIBLE
                 }
+                R.id.profileFragment2->{
+                    layoutParams.height = 0
+                    binding.imageView.layoutParams = layoutParams
+                    binding.textView3.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,0
+                    )
+                    binding.verticalLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+                    binding.gamesPageButton.visibility = View.VISIBLE
+                    binding.profilePageButton.visibility = View.VISIBLE
+                    binding.playlistPageButton.visibility = View.VISIBLE
+                    binding.reviewsPageButton.visibility = View.VISIBLE
+
+                }
+                R.id.changePasswordFragment -> {
+                    layoutParams.height = 400
+                    binding.imageView.layoutParams = layoutParams
+                    binding.textView3.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    binding.verticalLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0)
+                    binding.gamesPageButton.visibility = View.INVISIBLE
+                    binding.profilePageButton.visibility = View.INVISIBLE
+                    binding.playlistPageButton.visibility = View.INVISIBLE
+                    binding.reviewsPageButton.visibility = View.INVISIBLE
+
+                }
             }
 
 
@@ -73,6 +102,7 @@ class MainActivity : AppCompatActivity() {
 
         sharedPlaylistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
         sharedReviewViewModel = ViewModelProvider(this).get(ReviewViewModel::class.java)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         binding.gamesPageButton.setOnClickListener{
             updateCurrentFragment()
             navigateToDestination(currentFragment,FragmentName.Games);
@@ -106,9 +136,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateCurrentFragment(){
         val id = getIdOfCurrentFragment()
-           if( navController.currentDestination?.id != id){
-               setCurrentFragmentById(navController.currentDestination?.id)
-           }
+       if( navController.currentDestination?.id != id){
+           setCurrentFragmentById(navController.currentDestination?.id)
+       }
     }
     private  fun getIdOfCurrentFragment(): Int{
         return when(currentFragment){

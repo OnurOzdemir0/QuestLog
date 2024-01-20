@@ -85,7 +85,7 @@
                     android:id="@+id/profileGamesFinishedByUser"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="@{Integer.toString(profileViewModel.getCurrentUserFinishedGameCount())}"
+                    android:text=""
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -94,7 +94,7 @@
                     android:id="@+id/profileGamesPlayingByUser"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="@{Integer.toString(profileViewModel.getCurrentUserPlayingGameCount())}"
+                    android:text=""
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -103,7 +103,7 @@
                     android:id="@+id/profileGamesReviewedByUser"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:text="@{Integer.toString(profileViewModel.getCurrentUserReviewedGameCount())}"
+                    android:text=""
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     android:textStyle="bold" />

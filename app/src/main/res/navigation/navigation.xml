@@ -123,6 +123,9 @@
         <action
             android:id="@+id/action_profileFragment2_to_gamesFragment"
             app:destination="@id/gamesFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -144,5 +147,13 @@
         <action
             android:id="@+id/action_registerFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.questlog.user.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
     </fragment>
 </navigation>
